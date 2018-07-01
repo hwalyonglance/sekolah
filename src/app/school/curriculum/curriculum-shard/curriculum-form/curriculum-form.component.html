@@ -1,0 +1,140 @@
+<mat-card style='max-width: 500px'>
+	<mat-card-header>
+		<mat-card-title>
+			{{ mode }} Akun Kurikulum
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form #formRef class='full-width' [formGroup]='form' fxLayout='row wrap'
+			fxLayoutAlign='center center' fxLayoutGap='16px' fxLayoutWrap='400px'>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input formControlName='NIM' id='NIM' matInput
+						[maxlength]='RULES.NIM.maxlength'
+						[minlength]='RULES.NIM.minlength' name='NIM' numeric
+						[placeholder]='RULES.NIM.placeholder' [readonly]='uniqueIsReadonly'
+						[required]='RULES.NIM.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('NIM') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.NIM'
+					[validationMessages]='VALIDATION_MESSAGES.NIM'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input #usernameRef formControlName='username' id='username' matInput
+						[maxlength]='RULES.username.maxlength'
+						[minlength]='RULES.username.minlength' name='username'
+						[placeholder]='RULES.username.placeholder' [readonly]='uniqueIsReadonly'
+						[required]='RULES.username.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('username') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.username'
+					[validationMessages]='VALIDATION_MESSAGES.username'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)' [fxHide]='passwordFieldIsHidden'>
+				<mat-form-field>
+					<input formControlName='password' id='password' matInput
+						[maxlength]='RULES.password.maxlength'
+						[minlength]='RULES.password.minlength' name='password' numneric
+						[placeholder]='RULES.password.placeholder' [readonly]='false'
+						[required]='RULES.password.required' [type]='password.type'
+						value=''>
+					<mat-icon (click)='password.toggle()' matSuffix [matTooltip]='password.tooltip'>
+						{{ password.icon }}
+					</mat-icon>
+					<!-- <mat-hint align='end'> {{ getHintLength('password') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.password'
+					[validationMessages]='VALIDATION_MESSAGES.password'>
+				</shard-form-error>
+			</div>
+			<!-- <div fxFlex='calc(50 - 8px)' [fxHide]='passwordFieldIsHidden'>
+				<mat-form-field>
+					<input formControlName='password1' id='password1' matInput
+						[maxlength]='RULES.password1.maxlength'
+						[minlength]='RULES.password1.minlength' name='password1' numneric
+						[placeholder]='RULES.password1.placeholder' [readonly]='false'
+						[required]='RULES.password1.required' [type]='password1.type'
+						value=''>
+					<mat-icon (click)='password1.toggle()' matSuffix [matTooltip]='password1.tooltip'>
+						{{ password1.icon }}
+					</mat-icon>
+					<mat-hint align='end'> {{ getHintLength('password1') }} </mat-hint>
+				</mat-form-field>
+				<shard-form-error [control]='controls.password1'
+					[validationMessages]='VALIDATION_MESSAGES.password1'>
+				</shard-form-error>
+			</div> -->
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input formControlName='name' id='name' matInput
+						[maxlength]='RULES.name.maxlength'
+						[minlength]='RULES.name.minlength' name='name'
+						[placeholder]='RULES.name.placeholder' [readonly]='false'
+						[required]='RULES.name.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('name') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.name'
+					[validationMessages]='VALIDATION_MESSAGES.name'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input #telpRef formControlName='telp' id='telp' matInput
+						[maxlength]='RULES.telp.maxlength'
+						[minlength]='RULES.telp.minlength' name='telp' numeric
+						[placeholder]='RULES.telp.placeholder' [readonly]='false'
+						[required]='RULES.telp.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('telp') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.telp'
+					[validationMessages]='VALIDATION_MESSAGES.telp'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<textarea #alamatRef formControlName='address' id='address'
+						[matAutosizeMaxRows]='RULES.address.matAutosizeMaxRows'
+						[matAutosizeMinRows]='RULES.address.matAutosizeMinRows'
+						matInput matTextareaAutosize
+						[maxlength]='RULES.address.maxlength'
+						[minlength]='RULES.address.minlength' name='address'
+						[placeholder]='RULES.address.placeholder' [readonly]='false'
+						[required]='RULES.address.required'>
+					</textarea>
+					<!-- <mat-hint align='end'> {{ getHintLength('address') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.address'
+					[validationMessages]='VALIDATION_MESSAGES.address'>
+				</shard-form-error>
+			</div>
+			<!-- <div fxFlex>
+				<pre>
+					{{ controls.username.errors | json }}
+				</pre>
+			</div> -->
+			<!-- <div fxFlex='calc(50 - 8px)'>
+<pre>_id		{{ controls._id.valid }}	{{ controls._id.value }} <br>
+NIM		{{ controls.NIM.valid }}	{{ controls.NIM.value }} <br>
+username	{{ controls.username.valid }}	{{ controls.username.value }} <br>
+name		{{ controls.name.valid }}	{{ controls.name.value }} <br>
+tglLahir	{{ controls.tglLahir.valid }}	{{ controls.tglLahir.value }} <br>
+telp	{{ controls.telp.valid }}	{{ controls.telp.value }} <br>
+address		{{ controls.address.valid }}	{{ controls.address.value }} <br>
+valid		{{ valid }}	{{ value | json }} <br>
+</pre>
+			</div> -->
+		</form>
+	</mat-card-content>
+	<mat-card-actions align='end'>
+		<!-- <button type='reset' mat-button>
+			<mat-icon>reset</mat-icon>
+			Reset
+		</button> -->
+		<button [disabled]='!valid' (click)='onSubmit($event)' color='primary' mat-raised-button>
+			Selesai
+		</button>
+	</mat-card-actions>
+</mat-card>

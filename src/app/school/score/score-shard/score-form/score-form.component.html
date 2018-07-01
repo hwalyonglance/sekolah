@@ -1,0 +1,131 @@
+<mat-card style='max-width: 500px'>
+	<mat-card-header>
+		<mat-card-title>
+			{{ mode }} Nilai
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form #formRef class='full-width' [formGroup]='form' fxLayout='row wrap'
+			fxLayoutGap='16px' fxLayoutWrap='400px'>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='scoreCode' id='scoreCode' matInput
+						[maxlength]='RULES.scoreCode.maxlength'
+						[minlength]='RULES.scoreCode.minlength' name='scoreCode'
+						[placeholder]='RULES.scoreCode.placeholder' [readonly]='uniqueIsReadonly'
+						[required]='RULES.scoreCode.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('scoreCode') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.scoreCode'
+					[validationMessages]='VALIDATION_MESSAGES.scoreCode'>
+				</shard-form-error>
+			</div>
+			<!-- <div *ngIf='!isModeEdit' fxFlex> -->
+			<div fxFlex>
+				<mat-form-field class='full-width'>
+					<mat-select formControlName='scoreStudent_id' id='scoreStudent_id'
+						[placeholder]='RULES.scoreStudent_id.placeholder'
+						[required]='RULES.scoreStudent_id.required'>
+						<mat-option *ngFor='let student of options.students; let i = index' [value]='student.student_id'>
+							{{student.studentName+' #'+student.student_id}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='scoreTask' id='scoreTask' matInput
+						[maxlength]='RULES.scoreTask.maxlength' name='scoreTask' numeric
+						[placeholder]='RULES.scoreTask.placeholder' [readonly]='false'
+						[required]='RULES.scoreTask.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('scoreTask') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.scoreTask'
+					[validationMessages]='VALIDATION_MESSAGES.scoreTask'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='scoreUTS' id='scoreUTS' matInput
+						[maxlength]='RULES.scoreUTS.maxlength' name='scoreUTS'
+						[placeholder]='RULES.scoreUTS.placeholder' [readonly]='false'
+						[required]='RULES.scoreUTS.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('scoreUTS') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.scoreUTS'
+					[validationMessages]='VALIDATION_MESSAGES.scoreUTS'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='scoreUAS' id='scoreUAS' matInput
+						[maxlength]='RULES.scoreUAS.maxlength' name='scoreUAS'
+						[placeholder]='RULES.scoreUAS.placeholder' [readonly]='false'
+						[required]='RULES.scoreUAS.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('scoreUAS') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.scoreUAS'
+					[validationMessages]='VALIDATION_MESSAGES.scoreUAS'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='scoreFinal' id='scoreFinal' matInput
+						[maxlength]='RULES.scoreFinal.maxlength' name='scoreFinal'
+						[placeholder]='RULES.scoreFinal.placeholder' [readonly]='true'
+						[required]='RULES.scoreFinal.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('scoreFinal') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.scoreFinal'
+					[validationMessages]='VALIDATION_MESSAGES.scoreFinal'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<textarea formControlName='scoreDescription' id='scoreDescription' matInput
+						matTextareaAutosize
+						[matAutosizeMaxRows]='RULES.scoreDescription.matAutosizeMaxRows'
+						[matAutosizeMinRows]='RULES.scoreDescription.matAutosizeMinRows'
+						[maxlength]='RULES.scoreDescription.maxlength' name='scoreDescription'
+						[placeholder]='RULES.scoreDescription.placeholder' [readonly]='false'
+						[required]='RULES.scoreDescription.required'>
+					</textarea>
+					<!-- <mat-hint align='end'> {{ getHintLength('scoreDescription') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.scoreDescription'
+					[validationMessages]='VALIDATION_MESSAGES.scoreDescription'>
+				</shard-form-error>
+			</div>
+			<!-- <div fxFlex>
+				<pre>Task	{{task}}
+UTS	{{uts}}
+UAS	{{uas}}
+Final	{{task+uts+uas}}
+</pre>
+			</div> -->
+			<!-- <div fxFlex><pre>{{options.students|json}}</pre></div> -->
+			<!-- <div fxFlex><pre>{{_studentsInScoreVs|json}}</pre></div> -->
+			<!-- <div fxFlex='calc(50 - 16px)'>
+<pre>_id		{{ controls._id.valid }}	{{ controls._id.value }} <br>
+scoreCode		{{ controls.scoreCode.valid }}	{{ controls.scoreCode.value }} <br>
+student-id	{{ controls.student_id.valid }}	{{ controls.student_id.value }} <br>
+scoreTask		{{ controls.scoreTask.valid }}	{{ controls.scoreTask.value }} <br>
+scoreUTS		{{ controls.scoreUTS.valid }}	{{ controls.scoreUTS.value }} <br>
+scoreUAS		{{ controls.scoreUAS.valid }}	{{ controls.scoreUAS.value }} <br>
+scoreFinal		{{ controls.scoreFinal.valid }}	{{ controls.scoreFinal.value }} <br>
+scoreDescription		{{ controls.scoreDescription.valid }}	{{ controls.scoreDescription.value }} <br>
+value		{{ valid }}	{{ value | json }}	{{ errors | json }} <br>
+</pre>
+			</div> -->
+		</form>
+	</mat-card-content>
+	<mat-card-actions align='end'>
+		<!-- <button type='reset' mat-button>
+			<mat-icon>reset</mat-icon>
+			Reset
+		</button> -->
+		<button [disabled]='!valid' (click)='onSubmit($event)' color='primary' mat-raised-button>
+			Selesai
+		</button>
+	</mat-card-actions>
+</mat-card>

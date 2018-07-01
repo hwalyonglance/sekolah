@@ -1,0 +1,78 @@
+<mat-card style='max-width: 500px'>
+	<mat-card-header>
+		<mat-card-title>
+			{{ mode }} Kelas
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form #formRef class='full-width' [formGroup]='form' fxLayout='row wrap'
+			fxLayoutGap='16px' fxLayoutWrap='400px'>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='classCode' id='classCode' matInput
+						[maxlength]='RULES.classCode.maxlength'
+						[minlength]='RULES.classCode.minlength' name='classCode'
+						[placeholder]='RULES.classCode.placeholder' [readonly]='uniqueIsReadonly'
+						[required]='RULES.classCode.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('classCode') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.classCode'
+					[validationMessages]='VALIDATION_MESSAGES.classCode'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='className' id='className' matInput
+						[maxlength]='RULES.className.maxlength'
+						[minlength]='RULES.className.minlength' name='className'
+						[placeholder]='RULES.className.placeholder' [readonly]='false'
+						[required]='RULES.className.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('className') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.className'
+					[validationMessages]='VALIDATION_MESSAGES.className'>
+				</shard-form-error>
+			</div>
+			<div fxFlex>
+				<mat-form-field class='full-width'>
+					<mat-select formControlName='classDepartment_id' id='classDepartment_id'
+						[placeholder]='RULES.classDepartment_id.placeholder'
+						[required]='RULES.classDepartment_id.required'>
+						<mat-option *ngFor='let department of select.departments' [value]='department.department_id'>
+							{{department.departmentName}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div fxFlex>
+				<mat-form-field class='full-width'>
+					<mat-select formControlName='classHomeroomTeacher_id' id='classHomeroomTeacher_id'
+						[placeholder]='RULES.classHomeroomTeacher_id.placeholder'
+						[required]='RULES.classHomeroomTeacher_id.required'>
+						<mat-option *ngFor='let teacher of select.teachers' [value]='teacher.teacher_id'>
+							{{teacher.teacherName}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<!-- <div fxFlex='calc(50 - 16px)'>
+<pre>_id		{{ controls._id.valid }}	{{ controls._id.value }}	{{ controls._id.errors | json }} <br>
+classCode		{{ controls.classCode.valid }}	{{ controls.classCode.value }}	{{ controls.classCode.errors | json }} <br>
+name		{{ controls.name.valid }}	{{ controls.name.value }}	{{ controls.name.errors | json }} <br>
+classDepartment_id		{{ controls.classDepartment_id.valid }}	{{ controls.classDepartment_id.value }}	{{ controls.classDepartment_id.errors | json }} <br>
+classHomeroomTeacher_id		{{ controls.classHomeroomTeacher_id.valid }}	{{ controls.classHomeroomTeacher_id.value }}	{{ controls.classHomeroomTeacher_id.errors | json }} <br>
+value		{{ valid }}	{{ value | json }} <br>
+</pre>
+			</div> -->
+		</form>
+	</mat-card-content>
+	<mat-card-actions align='end'>
+		<!-- <button type='reset' mat-button>
+			<mat-icon>reset</mat-icon>
+			Reset
+		</button> -->
+		<button [disabled]='!valid' (click)='onSubmit($event)' color='primary' mat-raised-button>
+			Selesai
+		</button>
+	</mat-card-actions>
+</mat-card>

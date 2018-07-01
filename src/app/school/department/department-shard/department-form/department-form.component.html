@@ -1,0 +1,54 @@
+<mat-card style='max-width: 500px'>
+	<mat-card-header>
+		<mat-card-title>
+			{{ mode }} Jurusan
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form #formRef class='full-width' [formGroup]='form' fxLayout='row wrap'
+			fxLayoutGap='16px' fxLayoutWrap='400px'>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='code' id='code' matInput
+						[maxlength]='RULES.code.maxlength'
+						[minlength]='RULES.code.minlength' name='code'
+						[placeholder]='RULES.code.placeholder' [readonly]='uniqueIsReadonly'
+						[required]='RULES.code.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('code') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.code'
+					[validationMessages]='VALIDATION_MESSAGES.code'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 16px)'>
+				<mat-form-field>
+					<input formControlName='name' id='name' matInput
+						[maxlength]='RULES.name.maxlength'
+						[minlength]='RULES.name.minlength' name='name'
+						[placeholder]='RULES.name.placeholder' [readonly]='false'
+						[required]='RULES.name.required' value="">
+					<!-- <mat-hint align='end'> {{ getHintLength('name') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.name'
+					[validationMessages]='VALIDATION_MESSAGES.name'>
+				</shard-form-error>
+			</div>
+			<!-- <div fxFlex='calc(50 - 16px)'>
+<pre>_id		{{ controls._id.valid }}	{{ controls._id.value }} <br>
+code		{{ controls.code.valid }}	{{ controls.code.value }} <br>
+name		{{ controls.name.valid }}	{{ controls.name.value }} <br>
+value		{{ valid }}	{{ value | json }} <br>
+</pre>
+			</div> -->
+		</form>
+	</mat-card-content>
+	<mat-card-actions align='end'>
+		<!-- <button type='reset' mat-button>
+			<mat-icon>reset</mat-icon>
+			Reset
+		</button> -->
+		<button [disabled]='!valid' (click)='onSubmit($event)' color='primary' mat-raised-button>
+			Selesai
+		</button>
+	</mat-card-actions>
+</mat-card>

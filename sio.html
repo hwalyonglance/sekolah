@@ -1,0 +1,13 @@
+<html>
+	<head>
+		<script src='/node_modules/socket.io-client/dist/socket.io.js'></script>
+	</head>
+	<body>
+		<script>
+			let sock = io('https://c-sekolah.firebaseapp.com:4321')
+			sock.on('connection', (res) => {
+				console.log(res)
+			})
+		</script>
+	</body>
+</html>

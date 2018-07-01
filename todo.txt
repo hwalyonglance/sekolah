@@ -1,0 +1,48 @@
+table master
+-table admin
+-table kurikulum
+-table penugasan guru
+-table nilai
+-table walikelas
+-table mapel
+-table kelas
+-table jurusan
+
+admin
+-kelola table guru
+-kelola table mapel
+-kelola table siswa
+-kelola table jurusan
+
+kurikulum
+-penugasan
+-kelola kelas		MENUJU SUDAH
+-lap.kelas
+-buat penugasan		MENUJU
+-lap.penugasan
+-kelola jurusan		MENUJU SUDAH
+
+walikelas
+-lap.nilai
+-kelola jurusan		SEHARUSNYA BERADA DI ADMIN/KURIKULUM
+
+
+guru
+-input nilai
+-lihat penugasan	MENUJU
+-lihat kelas		MENUJU SUDAH
+-kelola jurusan
+
+siswa
+-home				MENUJU SUDAH
+-lihat nilai
+-edit password
+-kelola jurusan		SEHARUSNYA BERADA DI ADMIN/KURIKULUM
+-logout				SUDAH
+
+login
+berdasarkan:
+-admin				SUDAH
+-guru				SUDAH
+-kurikulum			SUDAH
+-siswa				SUDAH

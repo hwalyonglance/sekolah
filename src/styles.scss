@@ -1,0 +1,273 @@
+// @import '~font-awesome/css/font-awesome.min.css';
+// @import './assets/iconfont/material-icons.css';
+// @import './assets/materialize.css',
+// @import '~animate.css/animate.min.css';
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://www.google.com/design/spec/style/color.html
+$sekolah-primary: mat-palette($mat-blue);
+$sekolah-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$sekolah-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$sekolah-theme: mat-light-theme($sekolah-primary, $sekolah-accent, $sekolah-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($sekolah-theme);
+
+// ---------------------------------
+
+@mixin sekolah-sfe-theme($theme) {
+	$warn: map-get($theme, warn);
+
+	.shard-form-error {
+		margin: 0 !important;
+		padding: 0 !important;
+		& > ul {
+			margin: 0 !important;
+			padding: 0 !important;
+			& > li {
+				color: mat-color($warn);
+			}
+		}
+	}
+}
+
+@include sekolah-sfe-theme($sekolah-theme)
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	// transition: .5s;
+}
+
+body {
+	// background-color: #64b5f6;
+}
+[class*='-dashboard-content']{
+	// background-color: #64b5f6;
+	display: flex;
+	align-content: center;
+	justify-content: start;
+	flex-direction: column;
+}
+
+[class*='-dashboard-sidenav']{
+	// background-color: #90caf9;
+}
+
+.flex-fill{
+	flex: 1 1 fill;
+}
+
+// .flex-auto{
+// 	flex: 1 0 auto;
+// }
+
+.pointer{
+	cursor: pointer;
+}
+.full-width,
+.mat-form-field{
+	width: 100%;
+}
+.container, .no-padding{
+	padding: 0 !important;
+}
+
+.text-left{
+	text-align: left;
+}
+.text-right{
+	text-align: right;
+}
+
+h1, h2, h3, h4, h5, h6, .topnav, .no-margin{
+	margin: 0 !important;
+}
+h1{
+	padding: 36px;
+	text-align: center;
+}
+p{
+	padding: 4px 18px;
+}
+.mat-dialog-container{
+	max-height: 90vh;
+	min-width: 350px;
+	padding: 0 !important;
+	overflow-y: auto;
+	& .mat-card {
+		height: 100% !important;
+		width: 100% !important;
+	}
+	tbody{
+		cursor: pointer;
+	}
+}
+.iil{
+	margin: 2px 8px 2px 0;
+	height: 40px;
+	width: 40px;
+	float: left;
+}
+
+.hide, .hidden{
+	display: none !important;
+}
+.mat-card-actions{
+	padding: 0 20px;
+}
+.no-border-radius{
+	border-radius: 0 !important;
+}
+
+// .mat-row {
+// 	&:hover {
+// 		& .mat-column-_actions button,
+// 		& .mat-column-_actions button{
+// 			opacity: 1;
+// 		}
+// 	}
+// 	.mat-column-actions,
+	.mat-column-_actions{
+		text-align: right;
+		// & button{
+		// 	opacity: 0;
+		// }
+	}
+// }
+
+body { margin: 0; }
+
+[class*='shard-'] {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.rotate-90-deg{
+	transform: rotate(90deg)
+}
+.rotate-180-deg{
+	transform: rotate(180deg)
+}
+
+.mat-sidenav,
+.mat-sidenav-content{
+	padding: 0 !important;
+}
+
+.center{
+	margin-left: auto !important;
+	margin-right: auto !important;
+	align-self: center;
+	align-content: center;
+}
+
+table.mat-table td::after,
+table.mat-table th::after,
+table.mat-table td::before,
+table.mat-table th::before, {
+	// margin-left: 4px !important;
+	// margin-right: 4px !important;
+	// padding-left: 4px !important;
+	// padding-right: 4px !important;
+	// content: ' ';
+}
+.small{
+	transform: scale(.8);
+}
+
+.scale-1, .scale-children-1 * {
+	transform: scale(.1) !important;
+	.mat-toolbar#{&}{
+		height: 0px !important;
+	}
+}
+.scale-2, .scale-children-2 * {
+	transform: scale(.2) !important;
+	.mat-toolbar#{&}{
+		height: 0px !important
+	}
+}
+.scale-3, .scale-children-3 * {
+	transform: scale(.3) !important;
+	.mat-toolbar#{&}{
+		height: 8px !important;
+	}
+}
+.scale-4, .scale-children-4 * {
+	transform: scale(.4) !important;
+	.mat-toolbar#{&}{
+		height: 16px !important;
+	}
+}
+.scale-5, .scale-children-5 * {
+	transform: scale(.5) !important;
+	.mat-toolbar#{&}{
+		height: 24px !important;
+	}
+}
+.scale-6, .scale-children-6 * {
+	transform: scale(.6) !important;
+	.mat-toolbar#{&}{
+		height: 32px !important;
+	}
+}
+.scale-7, .scale-children-7 * {
+	transform: scale(.7) !important;
+	.mat-toolbar#{&}{
+		height: 40px !important;
+	}
+}
+.scale-8, .scale-children-8 * {
+	transform: scale(.8) !important;
+	.mat-toolbar#{&}{
+		height: 48px !important;
+	}
+}
+.scale-9, .scale-children-9 * {
+	transform: scale(.9) !important;
+	.mat-toolbar#{&}{
+		height: 56px !important;
+	}
+}
+
+.shard-dashboard {
+	height: 100vh !important;
+	width: 100vw !important;
+}
+
+table.p  tr td:nth-child(1) {
+	text-align: right;
+}
+table.p  tr td:nth-child(2) {
+	padding-left: 16px;
+}
+
+.mat-list-item.active{
+	background-color: #e3f2fd;
+	border-left: 4px solid #2196f3;
+}
+
+.mat-cell {
+	padding-left: 4px !important;
+	padding-right: 4px !important;
+}
+
+.mat-column-_index {
+	padding-left: 20px !important;
+}

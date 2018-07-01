@@ -1,0 +1,154 @@
+<mat-card style='width: 500px'>
+	<mat-card-header>
+		<mat-card-title>
+			{{ mode }} Penugasan Guru
+		</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form #formRef class='full-width' [formGroup]='form'
+			fxLayout='row wrap' fxLayoutGap='8px' fxLayoutWrap='400px'>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<!-- <input formControlName='teacherAssignmentCode' id='teacherAssignmentCode' matInput -->
+					<input formControlName='teacherAssignmentCode' id='teacherAssignmentCode' matInput
+						[maxlength]='RULES.teacherAssignmentCode.maxlength'
+						[minlength]='RULES.teacherAssignmentCode.minlength' name='teacherAssignmentCode'
+						[placeholder]='RULES.teacherAssignmentCode.placeholder' [readonly]='uniqueIsReadonly'
+						[required]='RULES.teacherAssignmentCode.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('teacherAssignmentCode') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentCode'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentCode'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<mat-select formControlName='teacherAssignmentTeacher_id' id='teacherAssignmentTeacher_id'
+						[placeholder]='RULES.teacherAssignmentTeacher_id.placeholder'
+						[required]='RULES.teacherAssignmentTeacher_id.required'>
+						<mat-option *ngFor='let teacher of select.teachers' [value]='teacher.teacher_id'>
+							{{teacher.teacherName}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentTeacher_id'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentTeacher_id'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<mat-select formControlName='teacherAssignmentClass_id' id='teacherAssignmentClass_id'
+						[placeholder]='RULES.teacherAssignmentClass_id.placeholder'
+						[required]='RULES.teacherAssignmentClass_id.required'>
+						<mat-option *ngFor='let class of select.classes' [value]='class.class_id'>
+							{{class.className}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentClass_id'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentClass_id'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<mat-select formControlName='teacherAssignmentSubject_id' id='teacherAssignmentSubject_id'
+						[placeholder]='RULES.teacherAssignmentSubject_id.placeholder'
+						[required]='RULES.teacherAssignmentSubject_id.required'>
+						<mat-option *ngFor='let subject of select.subjects' [value]='subject.subject_id'>
+							{{subject.subjectName}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentSubject_id'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentSubject_id'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input formControlName='teacherAssignmentHour' id='teacherAssignmentHour' matInput
+						[maxlength]='RULES.teacherAssignmentHour.maxlength'
+						[minlength]='RULES.teacherAssignmentHour.minlength' name='teacherAssignmentHour' numeric
+						[placeholder]='RULES.teacherAssignmentHour.placeholder'
+						[required]='RULES.teacherAssignmentHour.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('teacherAssignmentHour') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentHour'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentHour'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<mat-select formControlName='teacherAssignmentDay' id='teacherAssignmentDay'
+						[placeholder]='RULES.teacherAssignmentDay.placeholder'
+						[required]='RULES.teacherAssignmentDay.required'>
+						<mat-option *ngFor='let day of select.dayNames' [value]='day'>
+							{{day}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentDay'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentDay'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input formControlName='teacherAssignmentSemester' id='teacherAssignmentSemester' matInput
+						[maxlength]='RULES.teacherAssignmentSemester.maxlength'
+						[minlength]='RULES.teacherAssignmentSemester.minlength' name='teacherAssignmentSemester' numeric
+						[placeholder]='RULES.teacherAssignmentSemester.placeholder'
+						[required]='RULES.teacherAssignmentSemester.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('teacherAssignmentSemester') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentSemester'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentSemester'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)'>
+				<mat-form-field>
+					<input formControlName='teacherAssignmentPeriode' id='teacherAssignmentPeriode' matInput
+						[maxlength]='RULES.teacherAssignmentPeriode.maxlength'
+						[minlength]='RULES.teacherAssignmentPeriode.minlength' name='teacherAssignmentPeriode' numeric
+						[placeholder]='RULES.teacherAssignmentPeriode.placeholder'
+						[required]='RULES.teacherAssignmentPeriode.required' value=''>
+					<!-- <mat-hint align='end'> {{ getHintLength('teacherAssignmentPeriode') }} </mat-hint> -->
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentPeriode'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentPeriode'>
+				</shard-form-error>
+			</div>
+			<div fxFlex='calc(50 - 8px)' [fxShow]='isEditMode'>
+				<mat-form-field>
+					<mat-select formControlName='teacherAssignmentStatus' id='teacherAssignmentStatus'
+						[placeholder]='RULES.teacherAssignmentStatus.placeholder'
+						[required]='RULES.teacherAssignmentStatus.required' value='Aktif'>
+						<mat-option value='Aktif'>Aktif</mat-option>
+						<mat-option value='Selesai'>Selesai</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<shard-form-error [control]='controls.teacherAssignmentStatus'
+					[validationMessages]='VALIDATION_MESSAGES.teacherAssignmentStatus'>
+				</shard-form-error>
+			</div>
+			<!-- <div fxFlex='calc(50 - 8px)'>
+<pre>_id		{{ controls._id.valid }}	{{ controls._id.value }}	{{ controls._id.errors | json }} <br>
+teacherAssignmentCode		{{ controls.teacherAssignmentCode.valid }}	{{ controls.teacherAssignmentCode.value }}	{{ controls.teacherAssignmentCode.errors | json }} <br>
+teacherAssignmentTeacher_id	{{ controls.teacherAssignmentTeacher_id.valid }}	{{ controls.teacherAssignmentTeacher_id.value }}	{{ controls.teacherAssignmentTeacher_id.errors | json }} <br>
+teacherAssignmentClass_id	{{ controls.teacherAssignmentClass_id.valid }}	{{ controls.teacherAssignmentClass_id.value }}	{{ controls.teacherAssignmentClass_id.errors | json }} <br>
+teacherAssignmentSubject_id	{{ controls.teacherAssignmentSubject_id.valid }}	{{ controls.teacherAssignmentSubject_id.value }}	{{ controls.teacherAssignmentSubject_id.errors | json }} <br>
+teacherAssignmentSemester	{{ controls.teacherAssignmentSemester.valid }}	{{ controls.teacherAssignmentSemester.value }}	{{ controls.teacherAssignmentSemester.errors | json }} <br>
+teacherAssignmentPeriode	{{ controls.teacherAssignmentPeriode.valid }}	{{ controls.teacherAssignmentPeriode.value }}	{{ controls.teacherAssignmentPeriode.errors | json }} <br>
+valid		{{ valid }}	{{ value | json }}	{{ errors | json }} <br>
+</pre>
+			</div> -->
+		</form>
+	</mat-card-content>
+	<mat-card-actions align='end'>
+		<!-- <button type='reset' mat-button>
+			<mat-icon>reset</mat-icon>
+			Reset
+		</button> -->
+		<button (click)='onSubmit($event)' color='primary' [disabled]='!valid' mat-raised-button type='button'>
+			Selesai
+		</button>
+	</mat-card-actions>
+</mat-card>

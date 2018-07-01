@@ -1,0 +1,6 @@
+export * from './curriculum-dashboard/curriculum-dashboard.component'
+export * from './curriculum-form/curriculum-form.component'
+export * from './curriculum-form/curriculum-form.form'
+export * from './curriculum-login-form/curriculum-login-form.component'
+export * from './curriculum-profile/curriculum-profile.component'
+export * from './curriculum-table/curriculum-table.component'
