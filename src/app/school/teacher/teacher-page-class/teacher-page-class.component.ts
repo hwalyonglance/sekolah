@@ -37,7 +37,7 @@ export class TeacherPageClassComponent implements AfterViewInit, OnInit {
 	extraRowMenus: Menu[] =[
 		{ icon: 'visibility', label: 'Lihat Murid', onClick: (row) => {
 			this._router.navigate(['/guru', 'kelas', row.class_id, 'murid'])
-		} }
+		} },
 	]
 	showCreateMenu: boolean = false
 	showEditMenu: boolean = false

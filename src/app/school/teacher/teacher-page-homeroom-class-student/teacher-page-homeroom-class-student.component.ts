@@ -126,10 +126,10 @@ import {
 				</table>
 			</mat-expansion-panel>
 			<class-student-table
-				[showCreateMenu]='showCreateMenu'
-				[showEditMenu]='showEditMenu'
-				[showDeleteMenu]='showDeleteMenu'
-				[showRowMenuTrigger]='showRowMenuTrigger'
+				[extraRowMenus]='extraRowMenus'
+				[showCreateMenu]='false'
+				[showEditMenu]='false'
+				[showDeleteMenu]='false'
 				style='margin-top: 32px;'>
 			</class-student-table>
 		</teacher-dashboard>
@@ -140,10 +140,20 @@ export class TeacherPageHomeroomClassStudentComponent implements AfterViewInit, 
 	@ViewChild(ClassStudentTableComponent) classStudentTableRef: ClassStudentTableComponent
 
 	classV: ClassV = {}
-	showCreateMenu = false
-	showDeleteMenu = false
-	showEditMenu = false
-	showRowMenuTrigger = false
+	extraRowMenus: Menu[] = [
+		{ icon: 'visibility', label: 'Lihat Nilai', onClick: (row) => {
+			const [
+				slash,
+				teacher,
+				wali_kelas,
+				class_id,
+				murid
+			] = this._router.url.split('/')
+			const to = ['/guru', 'wali_kelas', class_id, 'murid', row.student_id, 'nilai']
+			console.log(row, to)
+			this._router.navigate(to)
+		} }
+	]
 	params: any = {}
 	constructor(
 		private _activatedRoute: ActivatedRoute,

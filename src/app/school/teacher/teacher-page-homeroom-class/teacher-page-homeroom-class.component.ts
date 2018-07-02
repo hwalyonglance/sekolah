@@ -21,12 +21,11 @@ import {
 		<teacher-dashboard>
 			<class-table
 				class='center'
-				[createUrl]="['/guru', 'kelas', 'buat']"
 				[extraMainMenus]='extraMainMenus'
 				[extraRowMenus]='extraRowMenus'
-				[showCreateMenu]='showCreateMenu'
-				[showDeleteMenu]='showDeleteMenu'
-				[showEditMenu]='showEditMenu'>
+				[showCreateMenu]='false'
+				[showDeleteMenu]='false'
+				[showEditMenu]='false'>
 			</class-table>
 		</teacher-dashboard>
 	`,
@@ -38,26 +37,20 @@ export class TeacherPageHomeroomClassComponent implements AfterViewInit, OnInit 
 	extraRowMenus: Menu[] =[
 		{ icon: 'visibility', label: 'Lihat Murid', onClick: (row) => {
 			this._router.navigate(['/guru', 'wali_kelas', row.class_id, 'murid'])
+		} },
+		{ icon: 'visibility', label: 'Lihat Nilai', onClick: (row) => {
+			this._router.navigate(['/guru', 'wali_kelas', row.class_id, 'nilai'])
 		} }
 	]
-	showCreateMenu: boolean = false
-	showEditMenu: boolean = false
-	showDeleteMenu: boolean = false
 	constructor(
 		private _auth: AuthService,
 		private _router: Router,
 	) {}
 	ngAfterViewInit() {
-		this.setData()
-		this.classTableRef.shardTableRef.refresh.subscribe(() => {
-			this.setData()
-		})
+		const teacher_id = this._auth.role.teacher.getValue()._id
+		this.classTableRef.shardTableRef.where = {
+			classHomeroomTeacher_id: teacher_id,
+		}
 	}
 	ngOnInit() {}
-	setData() {
-		const teacher_id = this._auth.role.teacher.getValue()._id
-		this.classTableRef.shardTableRef.setData({
-			classHomeroomTeacher_id: teacher_id,
-		}).subscribe()
-	}
 }

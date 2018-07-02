@@ -40,8 +40,8 @@ import {
 			[columns]='columns'
 			(deleteById)='onDeleteById($event)'
 			[extraMainMenus]='extraMainMenus'
+			[extraRowMenus]='extraRowMenus'
 			id='classWStudentStudent_id'
-			(refresh)='onRefresh($event)'
 			[showCreateMenu]='showCreateMenu'
 			[showDeleteMenu]='showDeleteMenu'
 			[showEditMenu]='showEditMenu'
@@ -60,6 +60,7 @@ export class ClassStudentTableComponent implements AfterViewInit, OnDestroy, OnI
 	@Input() createUrl = ['/admin', 'class', 'create']
 
 	@Input() extraMainMenus: Menu[] =[]
+	@Input() extraRowMenus: Menu[] =[]
 
 	@Input() showCreateMenu = true
 	@Input() showDeleteMenu = true
@@ -97,8 +98,5 @@ export class ClassStudentTableComponent implements AfterViewInit, OnDestroy, OnI
 			deleted	: `Berhasil dihapus.`,
 			table	: `classes_with_students`,
 		})
-	}
-	onRefresh(evt) {
-		evt.preventDefault()
 	}
 }

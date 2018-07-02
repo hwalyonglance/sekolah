@@ -60,6 +60,14 @@ export const studentColumns: Column[] = [
 	// { name: 'studentUpdatedAt'				, label: 'Diubah pada'			, hidden: true },
 ]
 
+export const subjectColumns: Column[] = [
+	{ name: 'subject_id'					, label: 'ID Mapel'				, hidden: true },
+	{ name: 'subjectCode'					, label: 'Kode Mapel'			, hidden: true },
+	{ name: 'subjectName'					, label: 'Mapel'			, hidden: false },
+	{ name: 'subjectCreatedAt'				, label: 'Mapel Dibuat pada'	, hidden: true },
+	// { name: 'subjectCupdatedAt'				, label: 'Updated at'			, hidden: true },
+]
+
 export const scoreColumns: Column[] = [
 	{ name: 'score_id'						, label: 'ID'					, hidden: false },
 	{ name: 'scoreCode'						, label: 'Kode'					, hidden: true },
@@ -68,22 +76,16 @@ export const scoreColumns: Column[] = [
 	{ name: 'scoreUTS'						, label: 'UTS'					, hidden: false },
 	{ name: 'scoreUAS'						, label: 'UAS'					, hidden: false },
 	{ name: 'scoreFinal'					, label: 'Akhir'				, hidden: false },
+	...classColumns,
+	...subjectColumns,
 	{ name: 'scoreDescription'				, label: 'Deskripsi'			, hidden: true },
 	{ name: 'scoreCreatedAt'				, label: 'Nilai Dibuat pada'	, hidden: true },
 	// { name: 'scoreUpdatedAt'				, label: 'Updated at'			, hidden: true },
 ]
 
 export const scoreWStudentColumns: Column[] = [
-	...scoreColumns,
 	...studentColumns,
-]
-
-export const subjectColumns: Column[] = [
-	{ name: 'subject_id'					, label: 'ID Mapel'				, hidden: true },
-	{ name: 'subjectCode'					, label: 'Kode Mapel'			, hidden: true },
-	{ name: 'subjectName'					, label: 'Mapel'			, hidden: false },
-	{ name: 'subjectCreatedAt'				, label: 'Mapel Dibuat pada'	, hidden: true },
-	// { name: 'subjectCupdatedAt'				, label: 'Updated at'			, hidden: true },
+	...scoreColumns,
 ]
 
 export const teacherColumns: Column[] = [

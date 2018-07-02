@@ -39,7 +39,6 @@ import {
 			[extraMainMenus]='extraMainMenus'
 			[extraRowMenus]='extraRowMenus'
 			id='class_id'
-			(refresh)='onRefresh($event)'
 			[showCreateMenu]='showCreateMenu'
 			[showDeleteMenu]='showDeleteMenu'
 			[showEditMenu]='showEditMenu'
@@ -97,8 +96,5 @@ export class ClassTableComponent implements AfterViewInit, OnDestroy, OnInit {
 		evt.default({
 			to: ['/kurikulum','kelas', evt._opts.class_id, 'ubah']
 		})
-	}
-	onRefresh(evt: ShardEvent) {
-		evt.preventDefault()
 	}
 }

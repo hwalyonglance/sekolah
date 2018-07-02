@@ -73,7 +73,7 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 
 	form: FormGroup
 	select	= {
-		classes		: [],
+		classes_v		: [],
 		dayNames	: DAY_NAMES	,
 		subjects	: [],
 		teachers	: [],
@@ -86,7 +86,7 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 		public util: UtilService
 	) {
 		this.getSelectData('teachers')
-		this.getSelectData('classes')
+		this.getSelectData('classes_v')
 		this.getSelectData('subjects')
 		_activatedRoute.data.subscribe((data: any) => {
 			this._data = data
@@ -181,7 +181,7 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 			}))
 		}
 	}
-	getSelectData(table: 'teachers' | 'classes' | 'subjects') {
+	getSelectData(table: 'teachers' | 'classes_v' | 'subjects') {
 		this._api.get(table)
 			.subscribe(
 				(r: any) => {

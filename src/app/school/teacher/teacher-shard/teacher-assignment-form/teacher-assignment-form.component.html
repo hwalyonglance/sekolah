@@ -27,7 +27,7 @@
 						[placeholder]='RULES.teacherAssignmentTeacher_id.placeholder'
 						[required]='RULES.teacherAssignmentTeacher_id.required'>
 						<mat-option *ngFor='let teacher of select.teachers' [value]='teacher.teacher_id'>
-							{{teacher.teacherName}}
+							{{teacher.teacherName}} - {{teacher.teacherNIM}} # {{teacher.teacher_id}}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
@@ -40,8 +40,8 @@
 					<mat-select formControlName='teacherAssignmentClass_id' id='teacherAssignmentClass_id'
 						[placeholder]='RULES.teacherAssignmentClass_id.placeholder'
 						[required]='RULES.teacherAssignmentClass_id.required'>
-						<mat-option *ngFor='let class of select.classes' [value]='class.class_id'>
-							{{class.className}}
+						<mat-option *ngFor='let class of select.classes_v' [value]='class.class_id'>
+							{{class.className}} - {{class.departmentName}} # {{class.class_id}}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>
@@ -55,7 +55,7 @@
 						[placeholder]='RULES.teacherAssignmentSubject_id.placeholder'
 						[required]='RULES.teacherAssignmentSubject_id.required'>
 						<mat-option *ngFor='let subject of select.subjects' [value]='subject.subject_id'>
-							{{subject.subjectName}}
+							{{subject.subjectName}} # {{subject.subject_id}}
 						</mat-option>
 					</mat-select>
 				</mat-form-field>

@@ -76,7 +76,7 @@ import { ApiService } from '../../s'
 			padding: 64px;
 		}
 		.table-wrapper {
-			max-width: 1000px;
+			max-width: 1150px;
 			overflow-x: auto;
 		}
 		.mat-table {

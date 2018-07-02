@@ -44,7 +44,6 @@ import {
 			(editById)='onEditById($event)'
 			id='score_id'
 			[pdf]='pdf'
-			(refresh)='onRefresh($event)'
 			[showCreateMenu]='showCreateMenu'
 			[showRowMenuTrigger]='showRowMenuTrigger'
 			title='Nilai' tableName='scores_v'>
@@ -108,10 +107,10 @@ export class ScoreTableComponent implements AfterViewInit, OnDestroy, OnInit {
 		// 	to: editUrl
 		// })
 	}
-	onRefresh(evt: ShardEvent) {
-		evt.preventDefault()
-		this.shardTableRef.setData({
-			scoreTeacherAssignment_id: this.teacherAssignmentV.teacherAssignment_id,
-		}).subscribe()
-	}
+	// onRefresh(evt: ShardEvent) {
+	// 	evt.preventDefault()
+	// 	this.shardTableRef.setData({
+	// 		scoreTeacherAssignment_id: this.teacherAssignmentV.teacherAssignment_id,
+	// 	}).subscribe()
+	// }
 }
