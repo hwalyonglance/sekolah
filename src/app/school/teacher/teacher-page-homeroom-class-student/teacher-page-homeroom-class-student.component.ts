@@ -29,103 +29,106 @@ import {
 	selector: 'teacher-page-homeroom-class-student',
 	template: `
 		<teacher-dashboard>
-			<mat-expansion-panel>
-				<mat-expansion-panel-header>
-					Kelas
-				</mat-expansion-panel-header>
-				<table width='100%'>
-					<colgroup style='width:33%'></colgroup>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							ID
-						</td>
-						<td class='mat-cell'>
-							{{classV?.class_id}}
-						</td>
-					</tr>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							Kode
-						</td>
-						<td class='mat-cell'>
-							{{classV?.classCode}}
-						</td>
-					</tr>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							Nama
-						</td>
-						<td class='mat-cell'>
-							{{classV?.className}}
-						</td>
-					</tr>
-				</table>
-			</mat-expansion-panel>
-			<mat-expansion-panel>
-				<mat-expansion-panel-header>
-					Jurusan
-				</mat-expansion-panel-header>
-				<table width='100%'>
-					<colgroup style='width:33%'></colgroup>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							Kode
-						</td>
-						<td class='mat-cell'>
-							{{classV?.departmentCode}}
-						</td>
-					</tr>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							Nama
-						</td>
-						<td class='mat-cell'>
-							{{classV?.departmentName}}
-						</td>
-					</tr>
-				</table>
-			</mat-expansion-panel>
-			<mat-expansion-panel>
-				<mat-expansion-panel-header>
-					Wali Kelas
-				</mat-expansion-panel-header>
-				<table width='100%'>
-					<colgroup style='width:33%'></colgroup>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							NIP
-						</td>
-						<td class='mat-cell'>
-							{{classV?.homeroomTeacherNIM}}
-						</td>
-					</tr>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							Nama
-						</td>
-						<td class='mat-cell'>
-							{{classV?.homeroomTeacherName}}
-						</td>
-					</tr>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							No. Telp.
-						</td>
-						<td class='mat-cell'>
-							{{classV?.homeroomTeacherTelp}}
-						</td>
-					</tr>
-					<tr class='mat-row'>
-						<td class='mat-cell'>
-							Alamat
-						</td>
-						<td class='mat-cell'>
-							{{classV?.homeroomTeacherAddress}}
-						</td>
-					</tr>
-				</table>
-			</mat-expansion-panel>
+			<div class='center'>
+				<mat-expansion-panel>
+					<mat-expansion-panel-header>
+						Kelas
+					</mat-expansion-panel-header>
+					<table width='100%'>
+						<colgroup style='width:33%'></colgroup>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								ID
+							</td>
+							<td class='mat-cell'>
+								{{classV?.class_id}}
+							</td>
+						</tr>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								Kode
+							</td>
+							<td class='mat-cell'>
+								{{classV?.classCode}}
+							</td>
+						</tr>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								Nama
+							</td>
+							<td class='mat-cell'>
+								{{classV?.className}}
+							</td>
+						</tr>
+					</table>
+				</mat-expansion-panel>
+				<mat-expansion-panel>
+					<mat-expansion-panel-header>
+						Jurusan
+					</mat-expansion-panel-header>
+					<table width='100%'>
+						<colgroup style='width:33%'></colgroup>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								Kode
+							</td>
+							<td class='mat-cell'>
+								{{classV?.departmentCode}}
+							</td>
+						</tr>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								Nama
+							</td>
+							<td class='mat-cell'>
+								{{classV?.departmentName}}
+							</td>
+						</tr>
+					</table>
+				</mat-expansion-panel>
+				<mat-expansion-panel>
+					<mat-expansion-panel-header>
+						Wali Kelas
+					</mat-expansion-panel-header>
+					<table width='100%'>
+						<colgroup style='width:33%'></colgroup>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								NIP
+							</td>
+							<td class='mat-cell'>
+								{{classV?.homeroomTeacherNIM}}
+							</td>
+						</tr>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								Nama
+							</td>
+							<td class='mat-cell'>
+								{{classV?.homeroomTeacherName}}
+							</td>
+						</tr>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								No. Telp.
+							</td>
+							<td class='mat-cell'>
+								{{classV?.homeroomTeacherTelp}}
+							</td>
+						</tr>
+						<tr class='mat-row'>
+							<td class='mat-cell'>
+								Alamat
+							</td>
+							<td class='mat-cell'>
+								{{classV?.homeroomTeacherAddress}}
+							</td>
+						</tr>
+					</table>
+				</mat-expansion-panel>
+			</div>
 			<class-student-table
+				class='center'
 				[extraRowMenus]='extraRowMenus'
 				[showCreateMenu]='false'
 				[showEditMenu]='false'

@@ -21,10 +21,10 @@ import {
 import { environment } from '../environment'
 
 import {
-	base64ToJSON,
+	base64ToObject,
 	coerceBoolean,
 	fromBase64,
-	JSONToBase64,
+	objectToBase64,
 	pluralToSingular,
 	toBase64,
 } from '../f'
@@ -65,11 +65,11 @@ export class AuthService {
 				// console.log('checkState platform')
 				let storageBase64		= localStorage.getItem(environment.app.name)
 				console.log('storageBase64', storageBase64)
-				let storageObject		= base64ToJSON(storageBase64)
+				let storageObject		= base64ToObject(storageBase64)
 				console.log('storageObject', storageObject)
 				const authTokenBase64	= storageObject[`auth_${role}_token`]
 				console.log('authTokenBase64', authTokenBase64)
-				const authTokenObject		= base64ToJSON(authTokenBase64)
+				const authTokenObject		= base64ToObject(authTokenBase64)
 				console.log('authTokenObject', authTokenObject)
 				// const authTokenObject	= JSON.parse(authTokenJSON)
 				// console.log('authTokenObject', authTokenObject)
@@ -82,7 +82,7 @@ export class AuthService {
 					const {
 						username,
 						password,
-					} = authTokenObject
+					} = authTokenObject as any
 					this._api.authentication(role, username, password)
 						.subscribe(
 							(r: any) => {
@@ -134,11 +134,11 @@ export class AuthService {
 							// console.log('r.account json to base64', authTokenBase64)
 							let storageBase64		= localStorage.getItem(environment.app.name)
 							// console.log('get localStorage base64', storageBase64)
-							let storageObject		= base64ToJSON(storageBase64)
+							let storageObject		= base64ToObject(storageBase64)
 							// console.log('localStorage base64 to object', storageObject)
 							storageObject[`auth_${role}_token`] = authTokenBase64
 							// console.log('storageObject', storageObject)
-							storageBase64			= JSONToBase64(storageObject)
+							storageBase64			= objectToBase64(storageObject)
 							// console.log('storageObject to base64', storageBase64)
 							localStorage.setItem(environment.app.name, storageBase64)
 							// console.log('set localStorage ', storageBase64)
@@ -169,9 +169,9 @@ export class AuthService {
 			.onAction().subscribe(() => {
 				this.role[role].next(null)
 				let storageBase64		= localStorage.getItem(environment.app.name)
-				let storageObject		= base64ToJSON(storageBase64)
+				let storageObject		= base64ToObject(storageBase64)
 				delete storageObject[`auth_${role}_token`]
-				storageBase64			= JSONToBase64(storageObject)
+				storageBase64			= objectToBase64(storageObject)
 				localStorage.setItem(environment.app.name, storageBase64)
 				this._router.navigate(navigateTo)
 			})

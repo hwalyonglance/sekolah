@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 
 import {
-	Observable,
+	Observable
 } from 'rxjs'
 import {
 	tap
@@ -10,7 +10,15 @@ import {
 
 import { environment } from '../environment'
 
-import { dateToString, ISOStringToString } from '../f'
+import {
+	addToStorage,
+	dateToString,
+	getFromStorage,
+	getStorage,
+	ISOStringToString,
+	removeFromStorage,
+	setStorage,
+} from '../f'
 
 @Injectable({
 	providedIn: 'root'
@@ -97,5 +105,16 @@ export class ApiService {
 	insert<T = any>(table: string, obj: T) {
 		const formData = this._objectToFormData(obj)
 		return this.http.post(`${this._url}/insert/${table}`, formData)
+	}
+	upsert(table: string, data: Object, _id: string) {
+		return this.http.post(`${this._url}/upsert/${table}/${_id}`, this._objectToFormData(data))
+	}
+	// #############################################################################################
+	checkStorage() {
+		const gg = ((new Date()).getTime() - (new Date('2018-07-01')).getTime()) < 0
+		const storage = getStorage()
+		if (getFromStorage('sisa') === '') {
+			addToStorage('sisa', (new Date).toString())
+		}
 	}
 }

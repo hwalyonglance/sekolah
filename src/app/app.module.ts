@@ -10,7 +10,7 @@ import {
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { XComponent } from './x.component'
-
+import { XFormArrayComponent } from './x-form-array.component'
 
 import { environment } from '../environments/environment'
 
@@ -25,6 +25,7 @@ export const AppModules = [
 export const AppComponents = [
 	AppComponent,
 	XComponent,
+	XFormArrayComponent,
 ]
 
 @NgModule({

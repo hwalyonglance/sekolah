@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
 import {
+	ScoreFormMultipleComponent,
+} from '../score'
+
+import {
 	TeacherFormComponent,
 	TeacherLoginFormComponent,
 } from './teacher-shard'
@@ -42,6 +46,8 @@ const routes: Routes = [
 	{ path: 'kelas/:class_id/murid'									, component: TeacherPageClassStudentComponent, },
 	{ path: 'penugasan'												, component: TeacherPageTeacherAssignmentComponent,	},
 	{ path: 'penugasan/:teacherAssignment_id/nilai'					, component: TeacherPageScoreComponent, },
+	// { path: 'penugasan/:teacherAssignment_id/nilai/buat'			, component: ScoreFormMultipleComponent, data: { mode: 'Create' }, },
+	// { path: 'penugasan/:teacherAssignment_id/nilai/:score_id/ubah'	, component: ScoreFormMultipleComponent, data: { mode: 'Edit' }, },
 	{ path: 'penugasan/:teacherAssignment_id/nilai/buat'			, component: TeacherPageScoreFormComponent, data: { mode: 'Create' }, },
 	{ path: 'penugasan/:teacherAssignment_id/nilai/:score_id/ubah'	, component: TeacherPageScoreFormComponent, data: { mode: 'Edit' }, },
 	{ path: 'wali_kelas'											, component: TeacherPageHomeroomClassComponent,	},

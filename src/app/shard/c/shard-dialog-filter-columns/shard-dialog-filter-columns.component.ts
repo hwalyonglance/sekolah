@@ -50,7 +50,7 @@ import { Column } from '../../i/dialog'
 								<mat-icon>keyboard_arrow_down</mat-icon>
 							</button>
 							<span fxFlex>
-								{{ column.label }}
+								{{ column | json }}
 							</span>
 						</div>
 					</mat-list-option>
@@ -92,7 +92,9 @@ export class ShardDialogFilterColumnsComponent implements OnInit {
 			opts: any
 		},
 		public dialogRef: MatDialogRef<ShardDialogFilterColumnsComponent>,
-	) {}
+	) {
+		alert(JSON.stringify(data.columns))
+	}
 	ngOnInit() {}
 	down(key: string, index: number) {
 		// setTimeout(() => {

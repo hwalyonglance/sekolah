@@ -13,9 +13,9 @@ export const UPPERCASE_CHARACTER	= `ABCDEFGHIJKLMNOPQRSTUVWXYZ`
 export type MemberAlias = 'admin' | 'curriculum' | 'student' | 'teacher'
 export type MiscAlias = 'department' | 'subject'
 
-export function addToStorage(key: string, value: string, asBase64: boolean = false) {
+export function addToStorage(key: string, value: string) {
 	const storage	= getStorage()
-	storage[key]	= asBase64 ? toBase64(value) : value
+	storage[key]	= toBase64(value)
 	setStorage(storage)
 	return storage
 }
@@ -41,7 +41,7 @@ export function aliasToMisc(role: MiscAlias, object) {
 	}
 	return copiedtObject as any
 }
-export function base64ToJSON(base64EncodedString: string) {
+export function base64ToObject(base64EncodedString: string): Object {
 	try{
 		return JSON.parse(fromBase64(base64EncodedString))
 	}catch{
@@ -131,18 +131,18 @@ export function dateToString(date: Date) {
 export function fromBase64(base64EncodedString: string) {
 	return atob(atob(atob(base64EncodedString)))
 }
-export function getFromStorage(key: string, asRaw: boolean = false) {
+export function getFromStorage(key: string) {
 	const storage	= getStorage()
-	const value		= asRaw ? fromBase64(storage[key]) : storage[key]
-	return value
+	const value		= fromBase64(storage[key])
+	return value || ''
 }
-export function getStorage() {
-	return JSON.parse(base64ToJSON(localStorage.getItem(environment.app.name)))
+export function getStorage(name?: string) {
+	return base64ToObject(localStorage.getItem(name || environment.app.name))
 }
-export function JSONBase64ToObject(JSONBase64: string) {
-	return JSON.parse(base64ToJSON(JSONBase64)) || {}
+export function objectBase64ToObject(JSONBase64: string) {
+	return base64ToObject(JSONBase64)
 }
-export function JSONToBase64(obj: Object) {
+export function objectToBase64(obj: Object) {
 	try{
 		return toBase64(JSON.stringify(obj))
 	}catch{
@@ -162,7 +162,7 @@ export function maxLength(str: string | number, max: number) {
 	return String(str).length <= max
 }
 export function ObjectToJSONBase64(object) {
-	return JSONToBase64(JSON.stringify(object))
+	return objectToBase64(JSON.stringify(object))
 }
 export function toAlias(alias: MemberAlias | MiscAlias, object) {
 	const copiedObject = {}
@@ -190,8 +190,8 @@ export function removeFromStorage(key: string) {
 	setStorage(storage)
 	return storage
 }
-export function setStorage(object) {
-	localStorage.setItem(environment.app.name, JSONToBase64(JSON.stringify(object)))
+export function setStorage(object: Object, name?: string) {
+	localStorage.setItem(name || environment.app.name, objectToBase64(JSON.stringify(object)))
 	return getStorage()
 }
 export function singularToPlural(str: string) {
@@ -199,7 +199,7 @@ export function singularToPlural(str: string) {
 }
 export function strongPassword(str: string) {
 	const STR = `${str}`
-	const lemah: any = {
+	const lemah = {
 		length		: STR.length,
 		lowercase	: countLowercaseCharacter(STR),
 		number		: countNumber(STR),

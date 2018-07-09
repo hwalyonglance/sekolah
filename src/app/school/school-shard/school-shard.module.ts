@@ -6,8 +6,7 @@ import {
 } from './c'
 
 @NgModule({
-	imports: [
-	],
+	imports: [],
 	declarations: [SchoolNavComponent, SchoolFooterComponent]
 })
 export class SchoolShardModule { }

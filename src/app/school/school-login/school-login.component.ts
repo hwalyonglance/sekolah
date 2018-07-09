@@ -28,6 +28,7 @@ import {
 				[role]='role'
 				(submit)='onSubmit($event)'
 				[to]="to">
+				<img class='center' src='../../../assets/pasundan/18-56-03-images.jpg' style='width: 300px'>
 			</shard-login-form>
 		</div>
 	`,

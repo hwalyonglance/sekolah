@@ -4,11 +4,13 @@ import { ShardModule } from '../../../shard'
 
 import {
 	ScoreFormComponent,
+	ScoreFormMultipleComponent,
 	ScoreTableComponent,
 } from './c'
 
 export const ScoreShardComponents = [
 	ScoreFormComponent,
+	ScoreFormMultipleComponent,
 	ScoreTableComponent,
 ]
 

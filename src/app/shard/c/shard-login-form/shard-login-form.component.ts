@@ -44,50 +44,53 @@ import { SHARD_LOGIN_FORM } from './shard-login-form.form'
 @Component({
 	selector: 'shard-login-form',
 	template: `
-		<mat-card>
-			<mat-card-title>
-				Masuk sebagai {{ loginAs }}
-			</mat-card-title>
-			<mat-card-content>
-				<form #formRef class='full-width' [formGroup]='form'>
-					<div fxFlex>
-						<mat-form-field>
-							<input #usernameRef formControlName='username' id='username' matInput
-								[maxlength]='RULES.username.maxlength'
-								[minlength]='RULES.username.minlength' name='username'
-								[placeholder]='RULES.username.placeholder'
-								[required]='true' value="">
-						</mat-form-field>
-						<shard-form-error [control]='controls.username'
-							[validationMessages]='VALIDATION_MESSAGES.username'>
-						</shard-form-error>
-					</div>
-					<div fxFlex>
-						<mat-form-field>
-							<input formControlName='password' id='password' matInput
-								[maxlength]='RULES.password.maxlength'
-								[minlength]='RULES.password.minlength' name='password' numneric
-								[placeholder]='RULES.password.placeholder'
-								[required]='true' [type]='password.type'
-								value=''>
-							<mat-icon (click)='password.toggle()' matSuffix
-								[matTooltip]='password.tooltip'>
-								{{ password.icon }}
-							</mat-icon>
-						</mat-form-field>
-						<shard-form-error [control]='controls.password'
-							[validationMessages]='VALIDATION_MESSAGES.password'>
-						</shard-form-error>
-					</div>
-				</form>
-			</mat-card-content>
-			<mat-card-actions align='end'>
-				<button (click)='onSubmit()' color='primary' [disabled]='!valid'
-					mat-button>
-						Masuk
-				</button>
-			</mat-card-actions>
-		</mat-card>
+		<div style='text-align: center; width: 100%'>
+			<ng-content></ng-content>
+			<mat-card>
+				<mat-card-title>
+					Masuk sebagai {{ loginAs }}
+				</mat-card-title>
+				<mat-card-content>
+					<form #formRef class='full-width' [formGroup]='form'>
+						<div fxFlex>
+							<mat-form-field>
+								<input #usernameRef formControlName='username' id='username' matInput
+									[maxlength]='RULES.username.maxlength'
+									[minlength]='RULES.username.minlength' name='username'
+									[placeholder]='RULES.username.placeholder'
+									[required]='true' value="">
+							</mat-form-field>
+							<shard-form-error [control]='controls.username'
+								[validationMessages]='VALIDATION_MESSAGES.username'>
+							</shard-form-error>
+						</div>
+						<div fxFlex>
+							<mat-form-field>
+								<input formControlName='password' id='password' matInput
+									[maxlength]='RULES.password.maxlength'
+									[minlength]='RULES.password.minlength' name='password' numneric
+									[placeholder]='RULES.password.placeholder'
+									[required]='true' [type]='password.type'
+									value=''>
+								<mat-icon (click)='password.toggle()' matSuffix
+									[matTooltip]='password.tooltip'>
+									{{ password.icon }}
+								</mat-icon>
+							</mat-form-field>
+							<shard-form-error [control]='controls.password'
+								[validationMessages]='VALIDATION_MESSAGES.password'>
+							</shard-form-error>
+						</div>
+					</form>
+				</mat-card-content>
+				<mat-card-actions align='end'>
+					<button (click)='onSubmit()' color='primary' [disabled]='!valid'
+						mat-button>
+							Masuk
+					</button>
+				</mat-card-actions>
+			</mat-card>
+		</div>
 	`,
 	styles: [`
 		.mat-card {

@@ -31,7 +31,6 @@ import {
 
 import {
 	ApiService,
-	Password,
 	UtilService,
 	validators,
 	ShardEvent,
@@ -67,13 +66,9 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 	@Output() reset = new EventEmitter
 	@Output() submit = new EventEmitter
 
-	@ViewChild('datePickerRef_tglLahir') tglLahirRef: MatDatepicker<Date>
-
 	readonly RULES = SCORE_FORM.RULES
 	readonly VALIDATION_MESSAGES = SCORE_FORM.VALIDATION_MESSAGES
 
-	readonly password = new Password()
-	readonly password1 = new Password()
 	get controls() { return this.form.controls || {} }
 	get errors() { return this.form.errors || {} }
 	get mode() {
@@ -84,16 +79,13 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 	get uts() { return Number(this.form.get('scoreUTS').value) }
 	get uas() { return Number(this.form.get('scoreUAS').value) }
 	get isModeEdit() { return this._data.mode === 'Edit' }
-	get passwordFieldIsHidden(){
-		return this._data.mode === 'Edit'
-	}
 	get valid() { return this.form.valid }
 	get value() { return this.form.value }
 	get uniqueIsReadonly() {
 		return this._data.mode === 'Edit'
 	}
 
-	form: FormGroup;
+	form: FormGroup
 	options = {
 		students: []
 	}
@@ -125,12 +117,12 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 				this.form.get('scoreTeacherAssignment_id').setValue(teacherAssignment_id)
 			}, 2000)
 			this.setTeacherAssignment(teacherAssignment_id, score_id)
-			if ( score_id ) {
+			if (score_id) {
 				this._api.getBy('scores_v', 'score_id', score_id)
 					.pipe(
 						retry(3),
-						// take(3),
-					)
+					// take(3),
+				)
 					.subscribe(
 						(r) => {
 							console.log('rsssssss', r)
@@ -147,8 +139,8 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 			}
 		})
 	}
-	ngAfterViewInit() {}
-	ngOnInit() {}
+	ngAfterViewInit() { }
+	ngOnInit() { }
 	buildForm() {
 		// const mode = this._router.url.endsWith('ubah') ? 'Edit' : 'Create'
 		// console.log(this._router.url, mode)
@@ -158,9 +150,9 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 			this.form.get('scoreUTS').valueChanges,
 			this.form.get('scoreUAS').valueChanges,
 		).subscribe(v => {
-			const task	= this.task	* .5
-			const uts	= this.uts	* .2
-			const uas	= this.uas	* .30
+			const task = this.task * .5
+			const uts = this.uts * .2
+			const uas = this.uas * .30
 			const final = task + uts + uas
 			this.form.get('scoreFinal').setValue(final)
 
@@ -168,22 +160,22 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 	}
 	getHintLength(controlName: string) {
 		return `${this.value[controlName].length}`
-				+`/ ${this.RULES[controlName].maxLength}`
+			+ `/ ${this.RULES[controlName].maxLength}`
 	}
 	onReset(value = this.value) {
 		this.reset.emit(value)
 	}
 	onSubmit(evt: Event) {
 		evt.preventDefault()
-		if(confirm('Yakin dengan data yang anda isi?')) {
+		if (confirm('Yakin dengan data yang anda isi?')) {
 			this.submit.next(new ShardEvent((opts) => {
 				const {
 					to = this.submitUrl,
 				} = opts
-				const score		= this.value
-				const key		= 'score_id'
-				const value		= score.score_id
-				if ( this._data.mode === 'Create' ) {
+				const score = this.value
+				const key = 'score_id'
+				const value = score.score_id
+				if (this._data.mode === 'Create') {
 					this._api
 						.insert('scores', score)
 						.subscribe(
@@ -194,8 +186,8 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 							(r) => {
 								console.log(r)
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				} else {
 					this._api
 						.updateBy('scores', key, value, score)
@@ -213,8 +205,8 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 								console.log('rrsssss', r)
 								alert('Gagal menyimpan perubahan.')
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				}
 			}))
 		}
@@ -229,16 +221,16 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 				(r) => {
 					console.log(r)
 				},
-			)
+		)
 	}
 	setTeacherAssignment(teacherAssignment_id: string, score_id?: string) {
 		this._api.getBy('teacher_assignments_v', 'teacherAssignment_id', teacherAssignment_id)
-				.subscribe(
-					(teacherAssignmentV: TeacherAssignmentV) => {
-						this._teacherAssignmentV = teacherAssignmentV
-						this.setStudentsNotInScore(teacherAssignment_id, score_id)
-					}
-				)
+			.subscribe(
+				(teacherAssignmentV: TeacherAssignmentV) => {
+					this._teacherAssignmentV = teacherAssignmentV
+					this.setStudentsNotInScore(teacherAssignment_id, score_id)
+				}
+			)
 	}
 	setStudentsInScore(teacherAssignment_id: string) {
 		this._api.getByQuery('students_in_scores_v', { teacherAssignment_id })
@@ -249,7 +241,7 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 						this.setStudentnClassV()
 					}
 				}
-		)
+			)
 	}
 	setStudentsNotInScore(teacherAssignment_id: string, score_id?: string) {
 		this._api.getByQuery('students_not_in_scores_v', { teacherAssignment_id })
@@ -261,14 +253,14 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 					if (score_id) {
 						this.setStudetInScoreVByTeacherAssignment_id(score_id)
 					} else {
-						if (snisVs.length===0) {
+						if (snisVs.length === 0) {
 							this.setStudentsInScore(teacherAssignment_id)
 						} else {
 							this.options.students = snisVs
 						}
 					}
 				}
-		)
+			)
 	}
 	setStudetInScoreVByTeacherAssignment_id(score_id: string) {
 		this._api.getBy('students_in_scores_v', 'score_id', score_id)
