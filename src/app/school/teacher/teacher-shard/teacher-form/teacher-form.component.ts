@@ -70,7 +70,7 @@ export class TeacherFormComponent implements AfterViewInit, OnInit {
 		const mode = this._data.mode
 		return mode === 'Create' ? 'Buat' : 'Ubah'
 	}
-	get passwordFieldIsHidden(){
+	get passwordFieldIsHidden() {
 		return this._data.mode === 'Edit'
 	}
 	get valid() { return this.form.valid }
@@ -93,19 +93,19 @@ export class TeacherFormComponent implements AfterViewInit, OnInit {
 		})
 		_activatedRoute.params.subscribe((params) => {
 			const { teacher_id } = params
-			if ( teacher_id ) {
-				this._api.getByQuery('teachers', {teacher_id})
+			if (teacher_id) {
+				this._api.getByQuery('teachers', { teacher_id })
 					.pipe(
 						retry(3),
-						// take(3)
-					)
+					// take(3)
+				)
 					.subscribe(
 						(r) => {
-							console.log(r[0])
+							// console.log(r[0])
 							this.setValue(r[0])
 						},
 						(r) => {
-							console.log(`getBy ${teacher_id} error`, r)
+							// console.log(`getBy ${teacher_id} error`, r)
 							// location.reload()
 						},
 						() => {
@@ -126,44 +126,44 @@ export class TeacherFormComponent implements AfterViewInit, OnInit {
 	}
 	getHintLength(controlName: string) {
 		return `${this.value[controlName].length}`
-				+`/ ${this.RULES[controlName].maxLength}`
+			+ `/ ${this.RULES[controlName].maxLength}`
 	}
 	onReset(value = this.value) {
 		this.reset.emit(value)
 	}
 	onSubmit(evt: Event) {
 		evt.preventDefault()
-		if(confirm('Yakin dengan data yang anda isi?')) {
-			const teacher	= this.value
-			const key		= '_id'
-			const value		= teacher._id
-			teacher.role	= 'teacher'
+		if (confirm('Yakin dengan data yang anda isi?')) {
+			const teacher = this.value
+			const key = '_id'
+			const value = teacher._id
+			teacher.role = 'teacher'
 			this.submit.next(new ShardEvent((opts) => {
 				const {
 					to = this.submitUrl,
 				} = opts
-				if ( this.passwordFieldIsHidden ) {
+				if (this.passwordFieldIsHidden) {
 					delete teacher.password
 				}
-				if ( this._data.mode === 'Create' ) {
+				if (this._data.mode === 'Create') {
 					this._api
 						.insert('members', teacher)
 						.subscribe(
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								this._router.navigate(to)
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				} else {
 					this._api
 						.updateBy('members', key, value, teacher)
 						.subscribe(
 							(r: any) => {
-								console.log(r)
+								// console.log(r)
 								if (r.success) {
 									this._router.navigate(to)
 								} else {
@@ -174,8 +174,8 @@ export class TeacherFormComponent implements AfterViewInit, OnInit {
 								// console.log(r)
 								alert('Gagal menyimpan perubahan.')
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				}
 			}))
 		}

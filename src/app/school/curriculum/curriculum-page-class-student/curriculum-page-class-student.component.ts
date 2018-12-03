@@ -146,47 +146,49 @@ import {
 })
 export class CurriculumPageClassStudentComponent implements AfterViewInit, OnInit {
 	private _studentTableDialogRef: MatDialogRef<StudentTableComponent>
-	@Input() extraMainMenus: Menu[] =[
-		{ icon: 'add', label: 'Tambah', onClick: () => {
-			console.log('ini dia')
-			this._studentTableDialogRef = this._dialog.open(StudentTableComponent)
-			this._studentTableDialogRef.componentInstance.shardTableRef.rowClick
-				.subscribe(
-					(evt: ShardEvent) => {
-						const _opts: Student = evt._opts
-						evt.preventDefault()
-						console.log('rowClick', evt._opts)
-						console.log('classV', this.classV)
-						const confirmText
-							= `Tambahkan Murid dengan nama "${_opts.studentName}" `
-							+ `ke Kelas "${this.classV.className}"`
+	@Input() extraMainMenus: Menu[] = [
+		{
+			icon: 'add', label: 'Tambah', onClick: () => {
+				// console.log('ini dia')
+				this._studentTableDialogRef = this._dialog.open(StudentTableComponent)
+				this._studentTableDialogRef.componentInstance.shardTableRef.rowClick
+					.subscribe(
+						(evt: ShardEvent) => {
+							const _opts: Student = evt._opts
+							evt.preventDefault()
+							// console.log('rowClick', evt._opts)
+							// console.log('classV', this.classV)
+							const confirmText
+								= `Tambahkan Murid dengan nama "${_opts.studentName}" `
+								+ `ke Kelas "${this.classV.className}"`
 
-						if ( confirm(confirmText) ) {
-							this._api
-								.insert('classes_with_students', {
-									classWStudentClass_id	: this.classV.class_id,
-									classWStudentStudent_id	: _opts.student_id,
-								})
-								.subscribe(
-									(r) => {
-										console.log('rrr', r)
-										if (r) {
-											this.setData()
-											this._studentTableDialogRef.close()
-										}
-									},
+							if (confirm(confirmText)) {
+								this._api
+									.insert('classes_with_students', {
+										classWStudentClass_id: this.classV.class_id,
+										classWStudentStudent_id: _opts.student_id,
+									})
+									.subscribe(
+										(r) => {
+											// console.log('rrr', r)
+											if (r) {
+												this.setData()
+												this._studentTableDialogRef.close()
+											}
+										},
 								)
+							}
 						}
-					}
-				)
-			this._studentTableDialogRef.componentInstance.shardTableRef.title = 'Murid'
-			this._studentTableDialogRef.componentInstance.shardTableRef.tableName = 'students_not_in_classes_v'
-			this._studentTableDialogRef.componentInstance.shardTableRef.showMainMenuTrigger = false
-			this._studentTableDialogRef.componentInstance.shardTableRef.showRowMenuTrigger = false
-			this._studentTableDialogRef.componentInstance.shardTableRef.setData().subscribe()
-			this._studentTableDialogRef.afterClosed()
-				.subscribe(() => this._studentTableDialogRef = null)
-		} }
+					)
+				this._studentTableDialogRef.componentInstance.shardTableRef.title = 'Murid'
+				this._studentTableDialogRef.componentInstance.shardTableRef.tableName = 'students_not_in_classes_v'
+				this._studentTableDialogRef.componentInstance.shardTableRef.showMainMenuTrigger = false
+				this._studentTableDialogRef.componentInstance.shardTableRef.showRowMenuTrigger = false
+				this._studentTableDialogRef.componentInstance.shardTableRef.setData().subscribe()
+				this._studentTableDialogRef.afterClosed()
+					.subscribe(() => this._studentTableDialogRef = null)
+			}
+		}
 	]
 	@ViewChild(ClassStudentTableComponent) classStudentTableRef: ClassStudentTableComponent
 
@@ -199,7 +201,7 @@ export class CurriculumPageClassStudentComponent implements AfterViewInit, OnIni
 		private _api: ApiService,
 		private _dialog: MatDialog,
 		private _router: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 		this._activatedRoute.params
 			.subscribe(
@@ -219,7 +221,7 @@ export class CurriculumPageClassStudentComponent implements AfterViewInit, OnIni
 				}
 			)
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	setData() {
 		this.classStudentTableRef.shardTableRef.where = {
 			classWStudentClass_id: this.params.class_id,

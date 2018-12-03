@@ -109,7 +109,7 @@ export class ShardLoginFormComponent implements OnDestroy, OnInit {
 	@Output() reset = new EventEmitter
 	@Output() submit = new EventEmitter
 
-	private _openSnackBar(msg: string){
+	private _openSnackBar(msg: string) {
 		this._snackBar.open(msg)._dismissAfter(4000)
 	}
 
@@ -143,14 +143,14 @@ export class ShardLoginFormComponent implements OnDestroy, OnInit {
 		this.checkState$ = this.auth.checkState(this.role)
 		this.checkState$.subscribe(
 			(authenticated) => {
-				console.log('shardFormLogin success', authenticated)
-				if ( authenticated ) {
-					console.log('redirected by', this.role, 'to', this.to)
+				// console.log('shardFormLogin success', authenticated)
+				if (authenticated) {
+					// console.log('redirected by', this.role, 'to', this.to)
 					this._router.navigate(this.to)
 				}
 			},
 			(err) => {
-				console.log('checkState', this.role, ' error', err)
+				// console.log('checkState', this.role, ' error', err)
 			}
 		)
 	}
@@ -164,9 +164,9 @@ export class ShardLoginFormComponent implements OnDestroy, OnInit {
 		} = this.value
 		this.submit.next(new ShardEvent((opts) => {
 			const {
-				to				= this.to,
-				authenticated	= 'Authenticated as ',
-				wrong			= 'Username/Password wrong.'
+				to = this.to,
+				authenticated = 'Authenticated as ',
+				wrong = 'Username/Password wrong.'
 			} = opts
 			this.auth
 				.login(this.role, username, password, {

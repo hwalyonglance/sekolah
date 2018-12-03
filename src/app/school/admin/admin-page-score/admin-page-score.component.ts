@@ -272,7 +272,7 @@ export class AdminPageScoreComponent implements AfterViewInit, OnInit {
 		private _activatedRoute: ActivatedRoute,
 		private _api: ApiService,
 		private _router: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 		this._activatedRoute.params
 			.subscribe(
@@ -296,11 +296,11 @@ export class AdminPageScoreComponent implements AfterViewInit, OnInit {
 				}
 			)
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	onEditById(evt: ShardEvent) {
-		let editUrl = this._router.url+'/'+evt._opts.score_id+'/ubah'
+		let editUrl = this._router.url + '/' + evt._opts.score_id + '/ubah'
 		// console.log('editById', evt, 'editUrl', editUrl)
-		console.log('evt', evt)
+		// console.log('evt', evt)
 		this._router.navigateByUrl(editUrl)
 	}
 }

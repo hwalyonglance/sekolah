@@ -101,20 +101,20 @@ export class ShardTableComponent<T = any>
 	private _handleOnCreate() {
 		this.create.next(new ShardEvent((opts) => {
 			const {
-				to	= ['/admin', this.tableName, 'create'],
+				to = ['/admin', this.tableName, 'create'],
 			} = opts
-			console.log('onCreate navigate to', to)
+			// console.log('onCreate navigate to', to)
 			this._router.navigate(to)
 		}))
 	}
 	private _handleOnDeleteById([key, value]) {
 		this.deleteById.next(new ShardEvent((_opts) => {
 			let {
-				ask		= `Are You sure want to delete this data?`,
-				deleted	= `deleted`,
-				error	= 'Error when to try delete data',
-				cancel	= 'Canceling delete',
-				table	= _opts.table || this.tableName
+				ask = `Are You sure want to delete this data?`,
+				deleted = `deleted`,
+				error = 'Error when to try delete data',
+				cancel = 'Canceling delete',
+				table = _opts.table || this.tableName
 			} = _opts || {}
 			this._deleteConfirmDialogRef
 				= this._dialog
@@ -154,12 +154,12 @@ export class ShardTableComponent<T = any>
 					if (['members', 'misc'].includes(table)) {
 						key = '_id'
 					}
-					console.log('deleteBy: table, key, value', table, key, value)
+					// console.log('deleteBy: table, key, value', table, key, value)
 					this._api.deleteBy(table, key, value)
 						.subscribe(
 							(r: any) => {
-								console.log(r)
-								if ( r.result ) {
+								// console.log(r)
+								if (r.result) {
 									const data = this.dataSource.data.slice()
 									this.dataSource.data
 										= data.filter((d: any) => d[this.id] != value)
@@ -169,7 +169,7 @@ export class ShardTableComponent<T = any>
 								}
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								this._openSnackBar(error)
 							},
 							() => {
@@ -187,8 +187,8 @@ export class ShardTableComponent<T = any>
 					}
 				)
 		}, {
-			_id: value
-		}))
+				_id: value
+			}))
 	}
 	private _handleOnDeleteFilter() {
 		this.deleteFilter.next(new ShardEvent((opts) => {
@@ -198,7 +198,7 @@ export class ShardTableComponent<T = any>
 			} = opts
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnDeleteSelected() {
 		this.deleteSelected.next(new ShardEvent((opts) => {
@@ -208,7 +208,7 @@ export class ShardTableComponent<T = any>
 			} = opts
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnEditById(row) {
 		// console.log(`editById`, this.id, row, this._router.url)
@@ -216,18 +216,18 @@ export class ShardTableComponent<T = any>
 			const {
 				to = ['/admin', this.tableName, row[this.id], 'edit']
 			} = opts
-			console.log('onEdit navigate to', to)
+			// console.log('onEdit navigate to', to)
 			this._router.navigate(to)
-		} , {
-			...row
-		}))
+		}, {
+				...row
+			}))
 	}
 	private _handleOnFilterColumns() {
-		console.log('_handleOnFilterColumns')
+		// console.log('_handleOnFilterColumns')
 		this.filterColumns.next(new ShardEvent((opts) => {
 			const {
-				selectAll	= 'Pilih semua',
-				deselectAll	= 'Hapus semua pilihan',
+				selectAll = 'Pilih semua',
+				deselectAll = 'Hapus semua pilihan',
 			} = opts
 			this._filterColumnsDialogRef = this._dialog.open(ShardDialogFilterColumnsComponent, {
 				data: {
@@ -251,7 +251,7 @@ export class ShardTableComponent<T = any>
 			})
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnPrintAll() {
 		this.printAll.next(new ShardEvent((opts) => {
@@ -262,7 +262,7 @@ export class ShardTableComponent<T = any>
 			const aTag: HTMLAnchorElement = this._renderer.createElement('a')
 			// console.clear()
 
-			console.log('where', this.where)
+			// console.log('where', this.where)
 			const value = { ...this.where, ...this.form.value }
 			const columnsToPrint = { ...this.where, ...this.columnsToPrint }
 			// console.log('value', value)
@@ -297,7 +297,7 @@ export class ShardTableComponent<T = any>
 			// })
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnPrintById(_id) {
 		this.printById.next(new ShardEvent(() => {
@@ -306,7 +306,7 @@ export class ShardTableComponent<T = any>
 			aTag.dispatchEvent(new MouseEvent('click'))
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnPrintFiltered() {
 		this.printFiltered.next(new ShardEvent((opts) => {
@@ -316,7 +316,7 @@ export class ShardTableComponent<T = any>
 			// console.log('default _handleOnPrintFilter')
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnPrintPerPeriod() {
 		this.printPerPeriod.next(new ShardEvent((opts) => {
@@ -326,7 +326,7 @@ export class ShardTableComponent<T = any>
 			} = opts
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnPrintSelected() {
 		this.printSelected.next(new ShardEvent((opts) => {
@@ -336,7 +336,7 @@ export class ShardTableComponent<T = any>
 			} = opts
 		}, {
 
-		}))
+			}))
 	}
 	private _handleOnRowClick(row) {
 		this.rowClick.next(new ShardEvent((opts) => {
@@ -345,8 +345,8 @@ export class ShardTableComponent<T = any>
 
 			} = opts
 		}, {
-			...row,
-		}))
+				...row,
+			}))
 	}
 	private _handleOnRefresh() {
 		this.refresh.next(new ShardEvent((opts) => {
@@ -372,7 +372,7 @@ export class ShardTableComponent<T = any>
 		this.form = this._fb.group({
 			...controlName
 		})
-		console.log('form', this.form)
+		// console.log('form', this.form)
 	}
 	private _columns: Column[] = []
 	@Input()
@@ -404,19 +404,19 @@ export class ShardTableComponent<T = any>
 	@Input() showMainMenuTrigger: boolean = true
 	@Input() showRowMenuTrigger: boolean = true
 
-	@Output() create			= new EventEmitter
-	@Output() deleteById		= new EventEmitter
-	@Output() deleteFilter		= new EventEmitter
-	@Output() deleteSelected	= new EventEmitter
-	@Output() editById			= new EventEmitter
-	@Output() filterColumns		= new EventEmitter
-	@Output() printAll			= new EventEmitter
-	@Output() printById			= new EventEmitter
-	@Output() printFiltered		= new EventEmitter
-	@Output() printPerPeriod	= new EventEmitter
-	@Output() printSelected		= new EventEmitter
-	@Output() rowClick			= new EventEmitter
-	@Output() refresh			= new EventEmitter
+	@Output() create = new EventEmitter
+	@Output() deleteById = new EventEmitter
+	@Output() deleteFilter = new EventEmitter
+	@Output() deleteSelected = new EventEmitter
+	@Output() editById = new EventEmitter
+	@Output() filterColumns = new EventEmitter
+	@Output() printAll = new EventEmitter
+	@Output() printById = new EventEmitter
+	@Output() printFiltered = new EventEmitter
+	@Output() printPerPeriod = new EventEmitter
+	@Output() printSelected = new EventEmitter
+	@Output() rowClick = new EventEmitter
+	@Output() refresh = new EventEmitter
 
 	// @ViewChild('filter') filter: ElementRef
 	@ViewChild(MatPaginator) paginatorRef: MatPaginator
@@ -426,7 +426,7 @@ export class ShardTableComponent<T = any>
 	@ViewChildren(MatHeaderRowDef) header: QueryList<MatHeaderRowDef>
 
 	get displayedColumns() {
-		let columns =  [
+		let columns = [
 			{ name: '_index', label: 'No', hidden: false },
 			...this.columns.filter(c => !c.hidden),
 		]
@@ -441,7 +441,7 @@ export class ShardTableComponent<T = any>
 	get displayedColumns2() {
 		return this.displayedColumns.map(c => {
 			return {
-				name: c.name+'2',
+				name: c.name + '2',
 				label: c.label,
 				hidden: c.hidden,
 			}
@@ -456,12 +456,12 @@ export class ShardTableComponent<T = any>
 	}
 	get columnsToPrint() {
 		return this.displayedColumns
-		.filter(c => !['_index', '_actions'].includes(c.name))
-		.map(c => {
-			return { [c.name]: c.label }
-		}).reduce((a, c) => {
-			return {...a, ...c}
-		}, {})
+			.filter(c => !['_index', '_actions'].includes(c.name))
+			.map(c => {
+				return { [c.name]: c.label }
+			}).reduce((a, c) => {
+				return { ...a, ...c }
+			}, {})
 	}
 
 	@Input() dataSource: MatTableDataSource<T> = new MatTableDataSource([])
@@ -483,7 +483,7 @@ export class ShardTableComponent<T = any>
 		private _renderer: Renderer2,
 		private _router: Router,
 		private _snackBar: MatSnackBar,
-	){}
+	) { }
 	ngAfterViewInit() {
 		// fromEvent(this.filter.nativeElement, 'keyup')
 		// 	.pipe(
@@ -528,7 +528,7 @@ export class ShardTableComponent<T = any>
 			// 	.toLowerCase()
 			// 	.indexOf(filter.toLowerCase()) !== -1
 			return Object.keys(filter)
-				.map(k => object[k].indexOf(filter[k]) !== -1 )
+				.map(k => object[k].indexOf(filter[k]) !== -1)
 				.every(v => v)
 		}
 	}
@@ -543,11 +543,11 @@ export class ShardTableComponent<T = any>
 					(r: any) => {
 						this.dataSource!.data = r
 						this.isLoading = false
-						console.log(r)
+						// console.log(r)
 						observer.next(r)
 					},
 					(r) => {
-						console.log(r)
+						// console.log(r)
 						observer.error(r)
 					},
 					() => { observer.complete() }
@@ -557,17 +557,17 @@ export class ShardTableComponent<T = any>
 }
 
 export type ShardTableEvent
-	=	'Create'
-	|	'DeleteById'
-	|	'DeleteByQuery'
-	|	'DeleteSelected'
-	|	'FilterColumns'
-	|	'Edit'
-	|	'PrintAll'
-	|	'PrintById'
-	|	'PrintByQuery'
-	|	'PrintFilter'
-	|	'PrintPerPeriod'
-	|	'PrintSelected'
-	|	'RowClick'
-	|	'Refresh'
+	= 'Create'
+	| 'DeleteById'
+	| 'DeleteByQuery'
+	| 'DeleteSelected'
+	| 'FilterColumns'
+	| 'Edit'
+	| 'PrintAll'
+	| 'PrintById'
+	| 'PrintByQuery'
+	| 'PrintFilter'
+	| 'PrintPerPeriod'
+	| 'PrintSelected'
+	| 'RowClick'
+	| 'Refresh'

@@ -75,10 +75,12 @@ export class ScoreFormMultipleComponent implements OnInit {
 	}
 	get isModeEdit() { return this._data.mode === 'Edit' }
 	get valid() { return this.form.valid }
-	get value() { return this.form.value.map(s => {
-		delete s.studentName
-		return s
-	}) }
+	get value() {
+		return this.form.value.map(s => {
+			delete s.studentName
+			return s
+		})
+	}
 	get uniqueIsReadonly() {
 		return this._data.mode === 'Edit'
 	}
@@ -94,7 +96,7 @@ export class ScoreFormMultipleComponent implements OnInit {
 	}
 	sitaV() {
 		const [slash, guru, assignment, teacherAssignment_id, nilai] = this._router.url.split('/')
-		this._api.getByQuery('students_in_teachers_assignments_v', {teacherAssignment_id})
+		this._api.getByQuery('students_in_teachers_assignments_v', { teacherAssignment_id })
 			.subscribe(
 				(sitaVs: StudentInTeacherAssignmentV[]) => {
 					// console.log('sitaVs', sitaVs)
@@ -105,10 +107,10 @@ export class ScoreFormMultipleComponent implements OnInit {
 						// console.log(`scoreGroups[${i}]`, scoreGroups[i])
 						scoreGroups[i].get('scoreTeacherAssignment_id').setValue(teacherAssignment_id)
 						scoreGroups[i].get('scoreStudent_id').setValue(student_id)
-						scoreGroups[i].get('studentName').setValue(sitaV.studentName + ' - '+ sitaV.studentNIM)
+						scoreGroups[i].get('studentName').setValue(sitaV.studentName + ' - ' + sitaV.studentNIM)
 						this._api.getByQuery('scores_v', { teacherAssignment_id, student_id })
 							.subscribe((scoresVs: ScoreV[]) => {
-								console.log('scoresVs', scoresVs)
+								// console.log('scoresVs', scoresVs)
 							}, console.log)
 						merge(
 							scoreGroups[i].get('scoreTask').valueChanges,
@@ -123,7 +125,7 @@ export class ScoreFormMultipleComponent implements OnInit {
 						})
 					})
 					this.form = this._fb.array(scoreGroups)
-					console.log('valid', this.valid, 'value', this.value)
+					// console.log('valid', this.valid, 'value', this.value)
 					this.onSubmit()
 				}
 			)

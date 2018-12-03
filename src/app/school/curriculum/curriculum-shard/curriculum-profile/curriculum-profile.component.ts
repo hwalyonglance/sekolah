@@ -62,9 +62,9 @@ export class CurriculumProfileComponent implements OnInit {
 		private _auth: AuthService,
 	) {
 		_auth.role.curriculum.subscribe((curriculum: Member) => {
-			console.log('curriculum',curriculum)
+			// console.log('curriculum',curriculum)
 			this.curriculum = curriculum
 		})
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 }

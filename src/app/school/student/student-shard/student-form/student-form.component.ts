@@ -91,19 +91,19 @@ export class StudentFormComponent implements AfterViewInit, OnInit {
 		})
 		_activatedRoute.params.subscribe((params) => {
 			const { student_id } = params
-			if ( student_id ) {
-				this._api.getByQuery('students', {student_id})
+			if (student_id) {
+				this._api.getByQuery('students', { student_id })
 					.pipe(
 						retry(3),
-						// take(3),
-					)
+					// take(3),
+				)
 					.subscribe(
 						(r) => {
-							console.log(r[0])
-							this.setValue(r[0])
+							// console.log(r[0])
+							// this.setValue(r[0])
 						},
 						(r) => {
-							console.log(`getBy ${student_id} error`, r)
+							// console.log(`getBy ${student_id} error`, r)
 							// location.reload()
 						},
 						() => {
@@ -131,67 +131,67 @@ export class StudentFormComponent implements AfterViewInit, OnInit {
 	}
 	getHintLength(controlName: string) {
 		return `${this.value[controlName].length}`
-				+ `/ ${this.RULES[controlName].maxLength}`
+			+ `/ ${this.RULES[controlName].maxLength}`
 	}
 	onReset(value = this.value) {
 		this.reset.emit(value)
 	}
 	onSubmit(evt: Event) {
 		evt.preventDefault()
-		const student	= this.value
-		const key		= '_id'
-		const value		= student._id
-		student.role	= 'student'
+		const student = this.value
+		const key = '_id'
+		const value = student._id
+		student.role = 'student'
 		if (confirm('Yakin dengan data yang anda isi?')) {
 			this.submit.next(new ShardEvent((opts) => {
 				const {
 					to = this.submitUrl
 				} = opts
-				if ( this.passwordFieldIsHidden ) {
+				if (this.passwordFieldIsHidden) {
 					delete student.password
 				}
-				if ( this._data.mode === 'Create' ) {
+				if (this._data.mode === 'Create') {
 					this._api
 						.insert('members', student)
 						.subscribe(
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								this._router.navigate(to)
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				} else {
 					this._api
 						.updateBy('members', key, value, student)
 						.subscribe(
 							(r: any) => {
-								console.log(r)
+								// console.log(r)
 								if (r.success) {
-									console.log(r)
+									// console.log(r)
 									this._router.navigate(to)
 								} else {
 									alert('Gagal menyimpan perubahan.')
 								}
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								alert('Gagal menyimpan perubahan.')
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				}
 			}, {
-				student
-			}))
+					student
+				}))
 		}
 	}
 	setValue(student: Student) {
-		console.log('setValue', student)
+		// console.log('setValue', student)
 		student = aliasToMember('student', student)
-		console.log('setValue', student)
+		// console.log('setValue', student)
 		for (const key in student) {
 			// console.log(key)
 			let value = student[key]

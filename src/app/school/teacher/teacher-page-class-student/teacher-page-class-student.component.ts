@@ -148,7 +148,7 @@ export class TeacherPageClassStudentComponent implements AfterViewInit, OnInit {
 		private _activatedRoute: ActivatedRoute,
 		private _api: ApiService,
 		private _router: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 		this._activatedRoute.params
 			.subscribe(
@@ -168,10 +168,10 @@ export class TeacherPageClassStudentComponent implements AfterViewInit, OnInit {
 				}
 			)
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	setData() {
 		this.classStudentTableRef.shardTableRef.where
-			= {classWStudentClass_id: this.params.class_id}
-		console.log('setData', this.classStudentTableRef.shardTableRef.where)
+			= { classWStudentClass_id: this.params.class_id }
+		// console.log('setData', this.classStudentTableRef.shardTableRef.where)
 	}
 }

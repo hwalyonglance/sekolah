@@ -13,10 +13,10 @@ import {
 	selector: '[numeric]'
 })
 export class NumericDirective {
-	constructor() {}
+	constructor() { }
 	@HostListener('keydown', ['$event']) onKeydown(evt: KeyboardEvent) {
-		console.log(evt.key, evt.keyCode)
-		if ( ![...NUMBERS, ...EXCEPTIONS].includes(evt.keyCode) ) {
+		// console.log(evt.key, evt.keyCode)
+		if (![...NUMBERS, ...EXCEPTIONS].includes(evt.keyCode)) {
 			evt.preventDefault()
 		}
 	}

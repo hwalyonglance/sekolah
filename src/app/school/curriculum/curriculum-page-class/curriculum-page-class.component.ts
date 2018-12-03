@@ -35,24 +35,26 @@ import {
 })
 export class CurriculumPageClassComponent implements AfterViewInit, OnInit {
 	@ViewChild(ClassTableComponent) classTableRef: ClassTableComponent
-	extraMainMenus: Menu[] =[]
-	extraRowMenus: Menu[] =[
-		{ icon: 'edit', label: 'Kelola Murid', onClick: (row) => {
-			this._router.navigate(['/kurikulum', 'kelas', row.class_id, 'murid'])
-		} }
+	extraMainMenus: Menu[] = []
+	extraRowMenus: Menu[] = [
+		{
+			icon: 'edit', label: 'Kelola Murid', onClick: (row) => {
+				this._router.navigate(['/kurikulum', 'kelas', row.class_id, 'murid'])
+			}
+		}
 	]
 	showCreateMenu: boolean = true
 	showEditMenu: boolean = true
 	constructor(
 		private _activatedRoute: ActivatedRoute,
 		private _router: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 		this.classTableRef.shardTableRef.refresh.subscribe(() => {
 			this.setData()
 		})
 		this._activatedRoute.params.subscribe((params) => {
-			console.log('params', params)
+			// console.log('params', params)
 			this.setData()
 		})
 	}

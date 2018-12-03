@@ -38,16 +38,16 @@ export class AdminPageScoreFormComponent implements AfterViewInit, OnInit {
 			nilai,
 			buat,
 		] = this._route.url.split('/')
-		console.log(slash, admin, kelas, class_id, penugasan, guru, teacherAssignment_id, nilai)
+		// console.log(slash, admin, kelas, class_id, penugasan, guru, teacherAssignment_id, nilai)
 		// return this._route.url.replace('/buat', '')
-		return ['/'+admin, kelas, class_id, penugasan, guru, teacherAssignment_id, nilai]
+		return ['/' + admin, kelas, class_id, penugasan, guru, teacherAssignment_id, nilai]
 	}
 	constructor(
 		private _activatedRoute: ActivatedRoute,
 		private _route: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 }

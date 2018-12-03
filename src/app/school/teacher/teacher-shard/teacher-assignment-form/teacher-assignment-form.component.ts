@@ -49,8 +49,8 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 		mode: 'Create'
 	}
 
-	@Input() createUrl	= ['/admin', 'teacher', 'assignment', 'add']
-	@Input() submitUrl	= ['/admin', 'teacher', 'assignment']
+	@Input() createUrl = ['/admin', 'teacher', 'assignment', 'add']
+	@Input() submitUrl = ['/admin', 'teacher', 'assignment']
 
 	@Output() reset = new EventEmitter
 	@Output() submit = new EventEmitter
@@ -72,11 +72,11 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 	}
 
 	form: FormGroup
-	select	= {
-		classes_v		: [],
-		dayNames	: DAY_NAMES	,
-		subjects	: [],
-		teachers	: [],
+	select = {
+		classes_v: [],
+		dayNames: DAY_NAMES,
+		subjects: [],
+		teachers: [],
 	}
 	constructor(
 		private _activatedRoute: ActivatedRoute,
@@ -96,20 +96,20 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 		})
 		_activatedRoute.params.subscribe((params) => {
 			const { teacherAssignment_id } = params
-			if ( teacherAssignment_id ) {
-				console.log('teacherAssignment_id', teacherAssignment_id)
+			if (teacherAssignment_id) {
+				// console.log('teacherAssignment_id', teacherAssignment_id)
 				this._api.getBy('teacher_assignments', 'teacherAssignment_id', teacherAssignment_id)
 					.pipe(
 						retry(3),
-						// take(3)
-					)
+					// take(3)
+				)
 					.subscribe(
 						(r) => {
-							console.log('teacherAssignment', r)
+							// console.log('teacherAssignment', r)
 							this.setValue(r)
 						},
 						(r) => {
-							console.log(`getBy ${teacherAssignment_id} error`, r)
+							// console.log(`getBy ${teacherAssignment_id} error`, r)
 						},
 						() => {
 							// console.log(`getBy ${teacherAssignment_id} complete`)
@@ -129,34 +129,34 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 	}
 	getHintLength(controlName: string) {
 		return `${this.value[controlName].length}`
-				+`/ ${this.RULES[controlName].maxLength}`
+			+ `/ ${this.RULES[controlName].maxLength}`
 	}
 	onReset(value = this.value) {
 		this.reset.emit(value)
 	}
 	onSubmit(evt: Event) {
 		evt.preventDefault()
-		if(confirm('Yakin dengan data yang anda isi?')) {
-			const teacherAssignment	= this.value
-			const key				= 'teacherAssignment_id'
-			const value				= teacherAssignment.teacherAssignment_id
+		if (confirm('Yakin dengan data yang anda isi?')) {
+			const teacherAssignment = this.value
+			const key = 'teacherAssignment_id'
+			const value = teacherAssignment.teacherAssignment_id
 			this.submit.next(new ShardEvent((opts) => {
 				const {
-					to	= this.submitUrl
+					to = this.submitUrl
 				} = opts
-				if ( this._data.mode === 'Create' ) {
+				if (this._data.mode === 'Create') {
 					this._api
 						.insert('teacher_assignments', teacherAssignment)
 						.subscribe(
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								this._router.navigate(to)
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				} else {
 					this._api
 						.updateBy('teacher_assignments', key, value, teacherAssignment)
@@ -173,25 +173,25 @@ export class TeacherAssignmentFormComponent implements AfterViewInit, OnInit {
 								// console.log(r)
 								alert('Gagal menyimpan perubahan.')
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				}
 			}, {
 
-			}))
+				}))
 		}
 	}
 	getSelectData(table: 'teachers' | 'classes_v' | 'subjects') {
 		this._api.get(table)
 			.subscribe(
 				(r: any) => {
-					console.log(r)
+					// console.log(r)
 					this.select[table] = r
 				},
 				(r) => {
-					console.log(r)
+					// console.log(r)
 				},
-			)
+		)
 	}
 	setValue(teacherAssignment: TeacherAssignment) {
 		for (let key in teacherAssignment) {

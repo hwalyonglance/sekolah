@@ -89,23 +89,23 @@ export class StudentPageScoreComponent implements AfterViewInit, OnInit {
 		private _api: ApiService,
 		private _auth: AuthService,
 		private _router: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 		this.setData()
 		this.scoreTableRef.shardTableRef.refresh.subscribe(() => {
 			this.setData()
 		})
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	onEditById(evt: ShardEvent) {
-		let editUrl = this._router.url+'/'+evt._opts.score_id+'/ubah'
+		let editUrl = this._router.url + '/' + evt._opts.score_id + '/ubah'
 		// console.log('editById', evt, 'editUrl', editUrl)
-		console.log('evt', evt)
+		// console.log('evt', evt)
 		this._router.navigateByUrl(editUrl)
 	}
 	setData() {
 		const student_id = this._auth.role.student.getValue()._id
-		console.log('student_id', student_id)
+		// console.log('student_id', student_id)
 		this.scoreTableRef.shardTableRef.where = {
 			scoreStudent_id: student_id,
 		}

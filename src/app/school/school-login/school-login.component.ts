@@ -13,6 +13,10 @@ import {
 	lowerFirst,
 } from 'lodash'
 
+import {
+	environment,
+} from '../../shard'
+
 @Component({
 	selector: 'school-login',
 	template: `
@@ -28,7 +32,7 @@ import {
 				[role]='role'
 				(submit)='onSubmit($event)'
 				[to]="to">
-				<img class='center' src='../../../assets/pasundan/18-56-03-images.jpg' style='width: 300px'>
+				<img class='center' src='{{env.app.url}}../../../assets/pasundan/18-56-03-images.jpg' style='height: 100px'>
 			</shard-login-form>
 		</div>
 	`,
@@ -38,9 +42,10 @@ import {
 	}
 })
 export class SchoolLoginComponent implements AfterViewInit, OnInit {
-	loginAs	: 'Admin' | 'Kurikulum' | 'Guru' | 'Murid'			= 'Murid'
-	role	: 'admin' | 'curriculum' | 'teacher' | 'student'	= 'student'
-	to		= ['/murid']
+	env = environment
+	loginAs: 'Admin' | 'Kurikulum' | 'Guru' | 'Murid' = 'Murid'
+	role: 'admin' | 'curriculum' | 'teacher' | 'student' = 'student'
+	to = ['/murid']
 	constructor(
 		private _activatedRoute: ActivatedRoute,
 		private _router: Router,
@@ -50,22 +55,22 @@ export class SchoolLoginComponent implements AfterViewInit, OnInit {
 			masuk,
 			$role,
 		]: any = _router.url.split('/')
-		console.log({ slash, masuk, $role })
-		this.loginAs	= $role
-		this.role		= this.lookupRole($role)
-		this.to			= ['/'+lowerFirst($role)]
+		// console.log({ slash, masuk, $role })
+		this.loginAs = $role
+		this.role = this.lookupRole($role)
+		this.to = ['/' + lowerFirst($role)]
 	}
-	ngAfterViewInit() {}
-	ngOnInit() {}
+	ngAfterViewInit() { }
+	ngOnInit() { }
 	onSubmit(e) {
-		console.log('loGn onSubmit', e)
+		// console.log('loGn onSubmit', e)
 	}
 	lookupRole(role: 'admin' | 'kurikulum' | 'guru' | 'murid') {
 		switch (role) {
-			case 'admin'	: return 'admin'
+			case 'admin': return 'admin'
 			case 'kurikulum': return 'curriculum'
-			case 'guru'		: return 'teacher'
-			case 'murid'	: return 'student'
+			case 'guru': return 'teacher'
+			case 'murid': return 'student'
 		}
 	}
 }

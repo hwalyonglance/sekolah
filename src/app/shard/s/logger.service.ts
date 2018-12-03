@@ -9,7 +9,7 @@ import { environment } from '../environment'
 	providedIn: 'root'
 })
 export class LoggerService {
-	constructor(private errorHandler: ErrorHandler) {}
+	constructor(private errorHandler: ErrorHandler) { }
 	log(value: any, ...rest: any[]) {
 		if (!environment.production) {
 			console.log(value, ...rest);

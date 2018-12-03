@@ -62,7 +62,7 @@ export class TeacherPageTeacherAssignmentComponent implements AfterViewInit, OnI
 
 	@Input() extraRowMenus: Menu[] = [
 		{ icon: 'edit', label: 'Kelola Nilai', onClick: (row: TeacherAssignmentV) => {
-			console.log('teacherAssignment row', row)
+			// console.log('teacherAssignment row', row)
 			const nilaiUrl = ['/guru', 'penugasan', row.teacherAssignment_id, 'nilai']
 			this._router.navigate(nilaiUrl)
 		} }

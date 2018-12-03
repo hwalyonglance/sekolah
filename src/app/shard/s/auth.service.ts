@@ -40,14 +40,14 @@ import {
 })
 export class AuthService {
 	private _url = environment.app.url + '/__/api'
-	private _openSnackBar(msg: string){
+	private _openSnackBar(msg: string) {
 		this._snackBar.open(msg)._dismissAfter(4000)
 	}
 	role = {
-		admin		: new BehaviorSubject(null),
-		curriculum	: new BehaviorSubject(null),
-		student		: new BehaviorSubject(null),
-		teacher		: new BehaviorSubject(null),
+		admin: new BehaviorSubject(null),
+		curriculum: new BehaviorSubject(null),
+		student: new BehaviorSubject(null),
+		teacher: new BehaviorSubject(null),
 	}
 	member: any
 	token: string
@@ -57,26 +57,26 @@ export class AuthService {
 		private _platform: PlatformService,
 		private _router: Router,
 		private _snackBar: MatSnackBar,
-	) {}
+	) { }
 	checkState(role: string) {
 		// console.log('checkState', role, 'begin')
 		return new Observable<boolean>(observer => {
-			if ( this._platform.browser ) {
+			if (this._platform.browser) {
 				// console.log('checkState platform')
-				let storageBase64		= localStorage.getItem(environment.app.name)
-				console.log('storageBase64', storageBase64)
-				let storageObject		= base64ToObject(storageBase64)
-				console.log('storageObject', storageObject)
-				const authTokenBase64	= storageObject[`auth_${role}_token`]
-				console.log('authTokenBase64', authTokenBase64)
-				const authTokenObject		= base64ToObject(authTokenBase64)
-				console.log('authTokenObject', authTokenObject)
+				let storageBase64 = localStorage.getItem(environment.app.name)
+				// console.log('storageBase64', storageBase64)
+				let storageObject = base64ToObject(storageBase64)
+				// console.log('storageObject', storageObject)
+				const authTokenBase64 = storageObject[`auth_${role}_token`]
+				// console.log('authTokenBase64', authTokenBase64)
+				const authTokenObject = base64ToObject(authTokenBase64)
+				// console.log('authTokenObject', authTokenObject)
 				// const authTokenObject	= JSON.parse(authTokenJSON)
 				// console.log('authTokenObject', authTokenObject)
-				console.log('JSON.stringify(authTokenObject)', JSON.stringify(authTokenObject))
-				console.log('Boolean(authTokenObject)', Boolean(authTokenObject))
+				// console.log('JSON.stringify(authTokenObject)', JSON.stringify(authTokenObject))
+				// console.log('Boolean(authTokenObject)', Boolean(authTokenObject))
 				// console.log('coerce', authTokenObject, coerceBoolean(authTokenObject))
-				if ( JSON.stringify(authTokenObject) !== '{}' && Boolean(authTokenObject) ) {
+				if (JSON.stringify(authTokenObject) !== '{}' && Boolean(authTokenObject)) {
 					// console.log('authTokenObject ', authTokenObject)
 					// console.log('role ', this.role[role])
 					const {
@@ -88,7 +88,7 @@ export class AuthService {
 							(r: any) => {
 								if (r.authenticated) {
 									this.role[role].next(r.account)
-									console.log('checkState', role, 'success', r)
+									// console.log('checkState', role, 'success', r)
 									observer.next(true)
 								} else {
 									observer.next(false)
@@ -112,8 +112,8 @@ export class AuthService {
 	}
 	login(role: string, username: string, password: string, opts: any) {
 		const {
-			authenticated	= 'Authenticated as ',
-			wrong			= 'Username/password is wrong.'
+			authenticated = 'Authenticated as ',
+			wrong = 'Username/password is wrong.'
 		} = opts
 		const formData = new FormData
 		formData.append('role', role)
@@ -123,22 +123,22 @@ export class AuthService {
 			this._api.authentication(role, username, password)
 				.pipe(
 					retry(3),
-				)
+			)
 				.subscribe(
 					(r: any) => {
 						// console.log('login success', role, r)
 						if (r.authenticated) {
-							const authTokenJSON		= JSON.stringify(r.account)
+							const authTokenJSON = JSON.stringify(r.account)
 							// console.log('r.account object to json', authTokenJSON)
-							const authTokenBase64	= toBase64(authTokenJSON)
+							const authTokenBase64 = toBase64(authTokenJSON)
 							// console.log('r.account json to base64', authTokenBase64)
-							let storageBase64		= localStorage.getItem(environment.app.name)
+							let storageBase64 = localStorage.getItem(environment.app.name)
 							// console.log('get localStorage base64', storageBase64)
-							let storageObject		= base64ToObject(storageBase64)
+							let storageObject = base64ToObject(storageBase64)
 							// console.log('localStorage base64 to object', storageObject)
 							storageObject[`auth_${role}_token`] = authTokenBase64
 							// console.log('storageObject', storageObject)
-							storageBase64			= objectToBase64(storageObject)
+							storageBase64 = objectToBase64(storageObject)
 							// console.log('storageObject to base64', storageBase64)
 							localStorage.setItem(environment.app.name, storageBase64)
 							// console.log('set localStorage ', storageBase64)
@@ -152,7 +152,7 @@ export class AuthService {
 						observer.next(r)
 					},
 					(r) => {
-						console.log('login error', r)
+						// console.log('login error', r)
 						observer.error(r)
 					},
 					() => {
@@ -168,10 +168,10 @@ export class AuthService {
 			})
 			.onAction().subscribe(() => {
 				this.role[role].next(null)
-				let storageBase64		= localStorage.getItem(environment.app.name)
-				let storageObject		= base64ToObject(storageBase64)
+				let storageBase64 = localStorage.getItem(environment.app.name)
+				let storageObject = base64ToObject(storageBase64)
 				delete storageObject[`auth_${role}_token`]
-				storageBase64			= objectToBase64(storageObject)
+				storageBase64 = objectToBase64(storageObject)
 				localStorage.setItem(environment.app.name, storageBase64)
 				this._router.navigate(navigateTo)
 			})

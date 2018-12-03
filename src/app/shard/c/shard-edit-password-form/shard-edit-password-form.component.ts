@@ -113,7 +113,7 @@ export class ShardEditPasswordFormComponent implements OnDestroy, OnInit {
 	@Output() reset = new EventEmitter
 	@Output() submit = new EventEmitter
 
-	private _openSnackBar(msg: string){
+	private _openSnackBar(msg: string) {
 		this._snackBar.open(msg)._dismissAfter(4000)
 	}
 
@@ -138,7 +138,7 @@ export class ShardEditPasswordFormComponent implements OnDestroy, OnInit {
 	}
 	ngOnDestroy() {
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	buildForm() {
 		this.form = this._fb.group(SHARD_EDIT_PASSWORD_FORM.CONTROLS_CONFIG())
 	}
@@ -154,18 +154,18 @@ export class ShardEditPasswordFormComponent implements OnDestroy, OnInit {
 					successMessage = 'Berhasil mengubah Password.',
 					errorMessage = 'Gagal mengubah Password.',
 				} = opts
-				this._api.updateBy('members', 'username', username, {password})
+				this._api.updateBy('members', 'username', username, { password })
 					.subscribe(
 						(r) => {
-							console.log('eDt password success', r)
+							// console.log('eDt password success', r)
 							this._router.navigate(to)
 							this._openSnackBar(successMessage)
 						},
 						(r) => {
-							console.log('eDt password error', r)
+							// console.log('eDt password error', r)
 							this._openSnackBar(errorMessage)
 						},
-					)
+				)
 			}, ...this.value))
 		}
 	}

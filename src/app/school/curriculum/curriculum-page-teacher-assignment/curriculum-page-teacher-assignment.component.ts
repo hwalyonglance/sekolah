@@ -40,21 +40,23 @@ export class CurriculumPageTeacherAssignmentComponent implements AfterViewInit, 
 	@ViewChild(TeacherAssignmentTableComponent) teacherAssignmentTableRef: TeacherAssignmentTableComponent
 
 	@Input() extraRowMenus: Menu[] = [
-		{ icon: 'visibility', label: 'Lihat Nilai', onClick: (row: TeacherAssignmentV) => {
-			console.log('teacherAssignment row', row)
-			const nilaiUrl = ['/kurikulum', 'kelas', row.class_id, 'penugasan', 'guru', row.teacherAssignment_id, 'nilai']
-			this._router.navigate(nilaiUrl)
-		} }
+		{
+			icon: 'visibility', label: 'Lihat Nilai', onClick: (row: TeacherAssignmentV) => {
+				// console.log('teacherAssignment row', row)
+				const nilaiUrl = ['/kurikulum', 'kelas', row.class_id, 'penugasan', 'guru', row.teacherAssignment_id, 'nilai']
+				this._router.navigate(nilaiUrl)
+			}
+		}
 	]
 	constructor(
 		private _router: Router,
-	) {}
+	) { }
 	ngAfterViewInit() {
 		this.teacherAssignmentTableRef.shardTableRef.setData().subscribe()
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	onEditById(evt: ShardEvent) {
-		console.log(evt)
+		// console.log(evt)
 		this._router.navigate(['/kurikulum', 'penugasan', 'guru', evt._opts.teacherAssignment_id, 'ubah'])
 	}
 }

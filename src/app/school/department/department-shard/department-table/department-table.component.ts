@@ -55,33 +55,33 @@ export class DepartmentTableComponent implements AfterViewInit, OnDestroy, OnIni
 		private _dialog: MatDialog,
 		private _router: Router,
 		private _snackBar: MatSnackBar,
-	) {}
-	ngAfterViewInit() {}
-	ngOnDestroy() {}
-	ngOnInit() {}
+	) { }
+	ngAfterViewInit() { }
+	ngOnDestroy() { }
+	ngOnInit() { }
 	onCreate(evt: ShardEvent) {
 		evt.preventDefault()
 		evt.default({
-			to		: this.createUrl
+			to: this.createUrl
 		})
 	}
-	onDeleteById(evt: ShardEvent){
+	onDeleteById(evt: ShardEvent) {
 		// console.log(evt)
 		evt.preventDefault()
 		evt.default({
-			ask		: `Yakin hapus data ini?`,
-			cancel	: `Penghapusan dibatalkan.`,
-			error	: `Gagal ketika menghapus data.`,
-			deleted	: `Berhasil dihapus.`,
+			ask: `Yakin hapus data ini?`,
+			cancel: `Penghapusan dibatalkan.`,
+			error: `Gagal ketika menghapus data.`,
+			deleted: `Berhasil dihapus.`,
 		})
 	}
-	onEditById(evt: ShardEvent){
-		console.log(evt._opts)
+	onEditById(evt: ShardEvent) {
+		// console.log(evt._opts)
 		const editUrl = ['/admin', 'jurusan', evt._opts.department_id, 'ubah']
-		console.log(editUrl)
+		// console.log(editUrl)
 		evt.preventDefault()
 		evt.default({
-			to		: editUrl
+			to: editUrl
 		})
 	}
 }

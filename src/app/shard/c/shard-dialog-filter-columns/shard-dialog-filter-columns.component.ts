@@ -23,7 +23,7 @@ import { Column } from '../../i/dialog'
 		<mat-card>
 			<mat-card-header>
 				<mat-card-title>
-					<h3>Filter {{ data.title }} Columns</h3>
+					<h3>{{ data.title }}</h3>
 				</mat-card-title>
 			</mat-card-header>
 			<mat-card-content>
@@ -50,7 +50,7 @@ import { Column } from '../../i/dialog'
 								<mat-icon>keyboard_arrow_down</mat-icon>
 							</button>
 							<span fxFlex>
-								{{ column | json }}
+								{{ column.label }}
 							</span>
 						</div>
 					</mat-list-option>
@@ -93,42 +93,42 @@ export class ShardDialogFilterColumnsComponent implements OnInit {
 		},
 		public dialogRef: MatDialogRef<ShardDialogFilterColumnsComponent>,
 	) {
-		alert(JSON.stringify(data.columns))
+		// alert(JSON.stringify(data.columns))
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 	down(key: string, index: number) {
 		// setTimeout(() => {
-			// console.log('filter', key, 'down')
-			const copiedColumns = this.data.columns.slice()
-			const that = copiedColumns[index]
-			that.hidden = !that.hidden
-			const below = copiedColumns[index+1]
-			copiedColumns[index] = below
-			copiedColumns[index+1] = that
-			this.data.columns = copiedColumns
-			this.data.onChange(copiedColumns)
+		// console.log('filter', key, 'down')
+		const copiedColumns = this.data.columns.slice()
+		const that = copiedColumns[index]
+		that.hidden = !that.hidden
+		const below = copiedColumns[index + 1]
+		copiedColumns[index] = below
+		copiedColumns[index + 1] = that
+		this.data.columns = copiedColumns
+		this.data.onChange(copiedColumns)
 		// }, 1)
 	}
 	onChange(columns: string) {
 		// setTimeout(() => {
-			// console.log('selectionList onchange', columns)
-			let copiedColumns = this.data.columns.slice()
-			copiedColumns = copiedColumns.map(c => {
-				c.hidden = !includes(columns, c.name)
-				return c
-			})
-			this.data.onChange(copiedColumns)
+		// console.log('selectionList onchange', columns)
+		let copiedColumns = this.data.columns.slice()
+		copiedColumns = copiedColumns.map(c => {
+			c.hidden = !includes(columns, c.name)
+			return c
+		})
+		this.data.onChange(copiedColumns)
 		// }, 2)
 	}
 	ngModelOnChange(columns: string) {
 		// setTimeout(() => {
-			// console.log('selectionList ngModelOnChange', columns)
-			let copiedColumns = this.data.columns.slice()
-			copiedColumns = copiedColumns.map(c => {
-				c.hidden = !includes(columns, c.name)
-				return c
-			})
-			this.data.onChange(copiedColumns)
+		// console.log('selectionList ngModelOnChange', columns)
+		let copiedColumns = this.data.columns.slice()
+		copiedColumns = copiedColumns.map(c => {
+			c.hidden = !includes(columns, c.name)
+			return c
+		})
+		this.data.onChange(copiedColumns)
 		// }, 3)
 	}
 	scrollToBottom() {
@@ -136,19 +136,19 @@ export class ShardDialogFilterColumnsComponent implements OnInit {
 	}
 	up(key: string, index: number) {
 		// setTimeout(() => {
-			// console.log('filter', key, 'up')
-			const copiedColumns = this.data.columns.slice()
-			// console.log('copiedColumns', copiedColumns)
-			const above = copiedColumns[index-1]
-			// console.log('above', above)
-			const that = copiedColumns[index]
-			// console.log('that', that)
-			that.hidden = !that.hidden
-			copiedColumns[index-1] = that
-			copiedColumns[index] = above
-			// console.log('copiedColumns', copiedColumns)
-			this.data.columns = copiedColumns
-			this.data.onChange(copiedColumns)
+		// console.log('filter', key, 'up')
+		const copiedColumns = this.data.columns.slice()
+		// console.log('copiedColumns', copiedColumns)
+		const above = copiedColumns[index - 1]
+		// console.log('above', above)
+		const that = copiedColumns[index]
+		// console.log('that', that)
+		that.hidden = !that.hidden
+		copiedColumns[index - 1] = that
+		copiedColumns[index] = above
+		// console.log('copiedColumns', copiedColumns)
+		this.data.columns = copiedColumns
+		this.data.onChange(copiedColumns)
 		// }, 3)
 	}
 }

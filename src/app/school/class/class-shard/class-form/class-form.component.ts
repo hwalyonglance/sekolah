@@ -166,7 +166,7 @@ export class ClassFormComponent implements AfterViewInit, OnInit {
 									// console.log(r)
 									this._router.navigate(to)
 								} else {
-									alert('Gagal menyimpan perubahan.')
+									// /('Gagal menyimpan perubahan.')
 								}
 							},
 							(r) => {

@@ -79,21 +79,21 @@ export class DepartmentFormComponent implements AfterViewInit, OnInit {
 			this.buildForm()
 		})
 		_activatedRoute.params.subscribe((params) => {
-			console.log(params)
+			// console.log(params)
 			const { department_id } = params
-			if ( department_id ) {
-				this._api.getByQuery('departments', {department_id})
+			if (department_id) {
+				this._api.getByQuery('departments', { department_id })
 					.pipe(
 						retry(3),
-						// take(3),
-					)
+					// take(3),
+				)
 					.subscribe(
 						(r) => {
-							console.log(r[0])
+							// console.log(r[0])
 							this.setValue(r[0])
 						},
 						(r) => {
-							console.log(`getBy ${department_id} error`, r)
+							// console.log(`getBy ${department_id} error`, r)
 							// location.reload()
 						},
 						() => {
@@ -103,30 +103,30 @@ export class DepartmentFormComponent implements AfterViewInit, OnInit {
 			}
 		})
 	}
-	ngAfterViewInit() {}
-	ngOnInit() {}
+	ngAfterViewInit() { }
+	ngOnInit() { }
 	buildForm() {
 		this.form = this._fb.group(DEPARTMENT_FORM.CONTROLS_CONFIG(this._api, this._data.mode))
 	}
 	getHintLength(controlName: string) {
 		return `${this.value[controlName].length}`
-				+`/ ${this.RULES[controlName].maxLength}`
+			+ `/ ${this.RULES[controlName].maxLength}`
 	}
 	onReset(value = this.value) {
 		this.reset.emit(value)
 	}
 	onSubmit(evt: Event) {
 		evt.preventDefault()
-		if(confirm('Yakin dengan data yang anda isi?')) {
+		if (confirm('Yakin dengan data yang anda isi?')) {
 			const department = this.value
-			department.u		= 'department'
-			const key			= '_id'
-			const value			= department._id
+			department.u = 'department'
+			const key = '_id'
+			const value = department._id
 			this.submit.next(new ShardEvent((opts) => {
 				const {
-					to	= ['/admin', 'jurusan']
+					to = ['/admin', 'jurusan']
 				} = opts
-				if ( this._data.mode === 'Create' ) {
+				if (this._data.mode === 'Create') {
 					this._api
 						.insert('misc', department)
 						.subscribe(
@@ -137,8 +137,8 @@ export class DepartmentFormComponent implements AfterViewInit, OnInit {
 							(r) => {
 								// console.log(r)
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				} else {
 					this._api
 						.updateBy('misc', key, value, department)
@@ -156,12 +156,12 @@ export class DepartmentFormComponent implements AfterViewInit, OnInit {
 								// console.log(r)
 								alert('Gagal menyimpan perubahan.')
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				}
 			}, {
-				department
-			}))
+					department
+				}))
 		}
 	}
 	setValue(department: Department) {

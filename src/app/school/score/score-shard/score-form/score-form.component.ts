@@ -125,7 +125,7 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 				)
 					.subscribe(
 						(r) => {
-							console.log('rsssssss', r)
+							// console.log('rsssssss', r)
 							this.setValue(r)
 						},
 						(r) => {
@@ -180,11 +180,11 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 						.insert('scores', score)
 						.subscribe(
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								this._router.navigate(to)
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 							},
 						// () => { console.log('complete') }
 					)
@@ -193,7 +193,7 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 						.updateBy('scores', key, value, score)
 						.subscribe(
 							(r: any) => {
-								console.log('rrrrrrrrrrr', r)
+								// console.log('rrrrrrrrrrr', r)
 								if (r.success) {
 									// console.log(r)
 									this._router.navigate(to)
@@ -202,7 +202,7 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 								}
 							},
 							(r) => {
-								console.log('rrsssss', r)
+								// console.log('rrsssss', r)
 								alert('Gagal menyimpan perubahan.')
 							},
 						// () => { console.log('complete') }
@@ -215,11 +215,11 @@ export class ScoreFormComponent implements AfterViewInit, OnInit {
 		this._api.getByQuery(table, where)
 			.subscribe(
 				(r: any) => {
-					console.log(r)
+					// console.log(r)
 					this.options[table] = r
 				},
 				(r) => {
-					console.log(r)
+					// console.log(r)
 				},
 		)
 	}

@@ -4,6 +4,7 @@ import {
 } from '@angular/core'
 
 import {
+	ApiService,
 	AuthService,
 } from '../../../../shard'
 
@@ -21,7 +22,7 @@ import {
 					ID
 				</td>
 				<td class='mat-cell'>
-					{{ student?._id }}
+					{{ student?.student_id }}
 				</td>
 			</tr>
 			<tr class='mat-row'>
@@ -29,7 +30,7 @@ import {
 					NIS
 				</td>
 				<td class='mat-cell'>
-					{{ student?.NIM }}
+					{{ student?.studentNIM }}
 				</td>
 			</tr>
 			<tr class='mat-row'>
@@ -37,7 +38,7 @@ import {
 					Nama
 				</td>
 				<td class='mat-cell'>
-					{{ student?.name }}
+					{{ student?.studentName }}
 				</td>
 			</tr>
 			<tr class='mat-row'>
@@ -45,7 +46,7 @@ import {
 					Username
 				</td>
 				<td class='mat-cell'>
-					{{ student?.username }}
+					{{ student?.studentUsername }}
 				</td>
 			</tr>
 			<tr class='mat-row'>
@@ -53,7 +54,7 @@ import {
 					Tanggal Lahir
 				</td>
 				<td class='mat-cell'>
-					{{ student?.birthDate }}
+					{{ student?.studentBirthDate }}
 				</td>
 			</tr>
 			<tr class='mat-row'>
@@ -61,7 +62,7 @@ import {
 					Orang Tua
 				</td>
 				<td class='mat-cell'>
-					{{ student?.parent }}
+					{{ student?.studentParent }}
 				</td>
 			</tr>
 			<tr class='mat-row'>
@@ -69,7 +70,23 @@ import {
 					Alamat
 				</td>
 				<td class='mat-cell'>
-					{{ student?.address }}
+					{{ student?.studentAddress }}
+				</td>
+			</tr>
+			<tr class='mat-row'>
+				<td class='mat-cell'>
+					Jurusan
+				</td>
+				<td class='mat-cell'>
+					{{ student?.departmentName }}
+				</td>
+			</tr>
+			<tr class='mat-row'>
+				<td class='mat-cell'>
+					Kelas
+				</td>
+				<td class='mat-cell'>
+					{{ student?.className }}
 				</td>
 			</tr>
 		</table>
@@ -82,14 +99,16 @@ import {
 	`]
 })
 export class StudentProfileComponent implements OnInit {
-	student: Member = {}
+	student: any = {}
 	constructor(
+		private _api: ApiService,
 		private _auth: AuthService,
 	) {
 		_auth.role.student.subscribe((student: Member) => {
-			console.log('student', student)
-			this.student = student
+			// console.log('student', student)
+			this._api.getBy('classes_with_students_v', 'student_id', student._id)
+				.subscribe(student => this.student = student)
 		})
 	}
-	ngOnInit() {}
+	ngOnInit() { }
 }

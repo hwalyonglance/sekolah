@@ -21,11 +21,11 @@ export class PlatformService {
 		@Inject(APP_ID) appId: string
 	) {
 		this.browser = !(this.server = isPlatformServer(platformId))
-		console.log(platformId)
-	// if ( platform == 'on the browser' && !isDevMode()) {
-	// 	const swRegister = document.createElement('script');
-	// 	swRegister.src = 'assets/sw-register.js';
-	// 	document.body.appendChild(swRegister);
-	// }
+		// console.log(platformId)
+		// if ( platform == 'on the browser' && !isDevMode()) {
+		// 	const swRegister = document.createElement('script');
+		// 	swRegister.src = 'assets/sw-register.js';
+		// 	document.body.appendChild(swRegister);
+		// }
 	}
 }

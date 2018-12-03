@@ -59,8 +59,8 @@ export class ClassStudentTableComponent implements AfterViewInit, OnDestroy, OnI
 
 	@Input() createUrl = ['/admin', 'class', 'create']
 
-	@Input() extraMainMenus: Menu[] =[]
-	@Input() extraRowMenus: Menu[] =[]
+	@Input() extraMainMenus: Menu[] = []
+	@Input() extraRowMenus: Menu[] = []
 
 	@Input() showCreateMenu = true
 	@Input() showDeleteMenu = true
@@ -80,23 +80,23 @@ export class ClassStudentTableComponent implements AfterViewInit, OnDestroy, OnI
 	) {
 		_activatedRoute.params.subscribe(
 			(params) => {
-				console.log('params', params)
+				// console.log('params', params)
 			}
 		)
 	}
-	ngAfterViewInit() {}
-	ngOnDestroy() {}
-	ngOnInit() {}
+	ngAfterViewInit() { }
+	ngOnDestroy() { }
+	ngOnInit() { }
 	onDeleteById(evt: ShardEvent) {
-		console.log('onDeleteById', evt)
+		// console.log('onDeleteById', evt)
 		evt.preventDefault()
 		const table = this.shardTableRef.tableName
 		evt.default({
-			ask		: `Yakin hapus data ini?`,
-			cancel	: `Penghapusan dibatalkan.`,
-			error	: `Gagal ketika menghapus data.`,
-			deleted	: `Berhasil dihapus.`,
-			table	: `classes_with_students`,
+			ask: `Yakin hapus data ini?`,
+			cancel: `Penghapusan dibatalkan.`,
+			error: `Gagal ketika menghapus data.`,
+			deleted: `Berhasil dihapus.`,
+			table: `classes_with_students`,
 		})
 	}
 }

@@ -70,31 +70,31 @@ export class ClassTableComponent implements AfterViewInit, OnDestroy, OnInit {
 		private _dialog: MatDialog,
 		private _router: Router,
 		private _snackBar: MatSnackBar,
-	) {}
-	ngAfterViewInit() {}
-	ngOnDestroy() {}
-	ngOnInit() {}
+	) { }
+	ngAfterViewInit() { }
+	ngOnDestroy() { }
+	ngOnInit() { }
 	onCreate(evt: ShardEvent) {
 		evt.preventDefault()
 		evt.default({
 			to: this.createUrl
 		})
 	}
-	onDeleteById(evt: ShardEvent){
+	onDeleteById(evt: ShardEvent) {
 		// console.log(evt)
 		evt.preventDefault()
 		evt.default({
-			ask		: `Yakin hapus data ini?`,
-			cancel	: `Penghapusan dibatalkan.`,
-			error	: `Gagal ketika menghapus data.`,
-			deleted	: `Berhasil dihapus.`,
+			ask: `Yakin hapus data ini?`,
+			cancel: `Penghapusan dibatalkan.`,
+			error: `Gagal ketika menghapus data.`,
+			deleted: `Berhasil dihapus.`,
 		})
 	}
-	onEditById(evt: ShardEvent){
+	onEditById(evt: ShardEvent) {
 		evt.preventDefault()
-		console.log(evt._opts)
+		// console.log(evt._opts)
 		evt.default({
-			to: ['/kurikulum','kelas', evt._opts.class_id, 'ubah']
+			to: ['/kurikulum', 'kelas', evt._opts.class_id, 'ubah']
 		})
 	}
 }

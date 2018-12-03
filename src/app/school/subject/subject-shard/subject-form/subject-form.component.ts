@@ -80,17 +80,17 @@ export class SubjectFormComponent implements AfterViewInit, OnInit {
 			this.buildForm()
 		})
 		_activatedRoute.params.subscribe((params) => {
-			console.log('ubah', params)
+			// console.log('ubah', params)
 			const { subject_id } = params
-			if ( subject_id ) {
-				this._api.getByQuery('subjects', {subject_id})
+			if (subject_id) {
+				this._api.getByQuery('subjects', { subject_id })
 					.pipe(
 						retry(3),
-						// take(3),
-					)
+					// take(3),
+				)
 					.subscribe(
 						(r) => {
-							console.log(r[0])
+							// console.log(r[0])
 							this.setValue(r[0])
 						},
 						(r) => {
@@ -104,70 +104,70 @@ export class SubjectFormComponent implements AfterViewInit, OnInit {
 			}
 		})
 	}
-	ngAfterViewInit() {}
-	ngOnInit() {}
+	ngAfterViewInit() { }
+	ngOnInit() { }
 	buildForm() {
 		this.form = this._fb.group(SUBJECT_FORM.CONTROLS_CONFIG(this._api, this._data.mode))
 	}
 	getHintLength(controlName: string) {
 		return `${this.value[controlName].length}`
-				+`/ ${this.RULES[controlName].maxLength}`
+			+ `/ ${this.RULES[controlName].maxLength}`
 	}
 	onReset(value = this.value) {
 		this.reset.emit(value)
 	}
 	onSubmit(evt: Event) {
 		evt.preventDefault()
-		if(confirm('Yakin dengan data yang anda isi?')) {
-			const subject	= this.value
-			const key		= '_id'
-			const value		= subject._id
-			subject.u		= 'subject'
+		if (confirm('Yakin dengan data yang anda isi?')) {
+			const subject = this.value
+			const key = '_id'
+			const value = subject._id
+			subject.u = 'subject'
 			this.submit.next(new ShardEvent((opts) => {
 				const {
 					to = ['/admin', 'mapel']
 				} = opts
-				if ( this._data.mode === 'Create' ) {
+				if (this._data.mode === 'Create') {
 					this._api
 						.insert('misc', subject)
 						.subscribe(
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								this._router.navigate(to)
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				} else {
 					this._api
 						.updateBy('misc', key, value, subject)
 						.subscribe(
 							(r: any) => {
-								console.log(r)
+								// console.log(r)
 								if (r.success) {
-									console.log(r)
+									// console.log(r)
 									this._router.navigate(to)
 								} else {
 									alert('Gagal menyimpan perubahan.')
 								}
 							},
 							(r) => {
-								console.log(r)
+								// console.log(r)
 								alert('Gagal menyimpan perubahan.')
 							},
-							// () => { console.log('complete') }
-						)
+						// () => { console.log('complete') }
+					)
 				}
 			}, {
-				subject
-			}))
+					subject
+				}))
 		}
 	}
 	setValue(subject: Subject) {
 		subject = aliasToMisc('subject', subject)
-		console.log(subject)
+		// console.log(subject)
 		for (let key in subject) {
 			// console.log(key)
 			let value = subject[key]

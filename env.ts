@@ -1,3 +1,4 @@
+require('./angular.json').projects.sekolah
 export const env = {
 	app		: {
 		name		: 'Sekolah',
